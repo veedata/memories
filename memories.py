@@ -6,7 +6,14 @@ import copy
 import piexif
 from datetime import datetime
 
-def dividedCrop(imageInputPath, imageFolderOutputPath):
+def dividedCrop(imageInputPath: str, imageFolderOutputPath: str) -> None:
+    """Divide a single image into multiple smaller ones. Uses background color
+
+    @type imageInputPath: str
+    @param imageInputPath: The path of the input image is to be passed
+    @type imageFolderOutputPath: str
+    @param imageFolderOutputPath: The path of the folder where the output image(s) are to be saved
+    """
 
     imagePath = imageInputPath
     image = cv2.imread(imagePath)
@@ -60,26 +67,29 @@ def dividedCrop(imageInputPath, imageFolderOutputPath):
 
             i = i + 1
 
-def addDateTest(imageInputPath, newDate):
-            
+def addDateTest(imageInputPath: str, newDate: str) -> None:
+    """Add date when the image was originally taken
+
+    @type imageInputPath: str
+    @param imageInputPath: The path of the input image is to be passed
+    @type newDate: str
+    @param newDate: The path of the folder where the output image(s) are to be saved
+    """
+
     try:
-        if dateData[subDirName] != "Unknown":
+        exif_dict = piexif.load(imageInputPath)
+        
+        newExifDate = datetime.strptime(newdate, '%d/%m/%Y')
+        newExifDate = newExifDate.strftime('%Y:%m:%d %H:%M:%S')
+        
+        exifDateToday = datetime.today()
+        exifDateToday = exifDateToday.strftime('%Y:%m:%d %H:%M:%S')
 
-            exif_dict = piexif.load(imageInputPath)
-            # newdate = dateData[subDirName]
-            
-            newExifDate = datetime.strptime(newdate, '%d/%m/%Y')
-            newExifDate = newExifDate.strftime('%Y:%m:%d %H:%M:%S')
-            
-            exifDateToday = datetime.today()
-            exifDateToday = exifDateToday.strftime('%Y:%m:%d %H:%M:%S')
+        exif_dict['Exif'][piexif.ExifIFD.DateTimeOriginal] = newExifDate
+        exif_dict['Exif'][piexif.ExifIFD.DateTimeDigitized] = exifDateToday
+        
+        exif_bytes = piexif.dump(exif_dict)
+        piexif.insert(exif_bytes, imagePath)
 
-            exif_dict['Exif'][piexif.ExifIFD.DateTimeOriginal] = newExifDate
-            exif_dict['Exif'][piexif.ExifIFD.DateTimeDigitized] = exifDateToday
-            
-            exif_bytes = piexif.dump(exif_dict)
-            piexif.insert(exif_bytes, imagePath)
-            
     except:
         continue
-    
