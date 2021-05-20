@@ -1,3 +1,0 @@
-import memories as me
-
-me.dividedCrop("D:\Downloads\Photo Scans\Folder ID 1\Scan_20210102 (1).png", "D:\Downloads\Photo Scans\Folder ID 1\Output")
