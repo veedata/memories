@@ -59,3 +59,27 @@ def dividedCrop(imageInputPath, imageFolderOutputPath):
             cv2.imwrite(newImagePath, img_crop)
 
             i = i + 1
+
+def addDateTest(imageInputPath, newDate):
+            
+    try:
+        if dateData[subDirName] != "Unknown":
+
+            exif_dict = piexif.load(imageInputPath)
+            # newdate = dateData[subDirName]
+            
+            newExifDate = datetime.strptime(newdate, '%d/%m/%Y')
+            newExifDate = newExifDate.strftime('%Y:%m:%d %H:%M:%S')
+            
+            exifDateToday = datetime.today()
+            exifDateToday = exifDateToday.strftime('%Y:%m:%d %H:%M:%S')
+
+            exif_dict['Exif'][piexif.ExifIFD.DateTimeOriginal] = newExifDate
+            exif_dict['Exif'][piexif.ExifIFD.DateTimeDigitized] = exifDateToday
+            
+            exif_bytes = piexif.dump(exif_dict)
+            piexif.insert(exif_bytes, imagePath)
+            
+    except:
+        continue
+    
