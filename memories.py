@@ -1,67 +1,61 @@
-# Alby might be a temporary name
-
 import os
 import cv2
 import numpy as np
 import math
 import copy
+import piexif
+from datetime import datetime
 
-def autoCropImages():
+def dividedCrop(imageInputPath, imageFolderOutputPath):
 
-    # image location bit
-    for (dirpath, dirnames, filenames) in os.walk("."):
-        if "Output" not in dirpath:
-            for eachFile in filenames:
-                if ".png" in eachFile:
-                    
-                    imagePath = os.path.join(dirpath, eachFile)
-                    image = cv2.imread(imagePath)
+    imagePath = imageInputPath
+    image = cv2.imread(imagePath)
 
-                    image = orientation(image, 90)
+    h, w, channels = image.shape
+    imageArea = h*w
 
-                    h, w, channels = image.shape
-                    imageArea = h*w
+    imageRot_grey = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    ret, thresh = cv2.threshold(imageRot_grey, 205, 255, cv2.THRESH_BINARY_INV)
 
-                    imageRot_grey = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-                    ret, thresh = cv2.threshold(imageRot_grey, 205, 255, cv2.THRESH_BINARY_INV)
+    contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    i = 1
+    for cnt in contours:
+        contourArea = cv2.contourArea(cnt)
 
-                    contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-                    i = 1
-                    for cnt in contours:
-                        contourArea = cv2.contourArea(cnt)
+        rect = cv2.minAreaRect(cnt)
+        box = cv2.boxPoints(rect)
+        box = np.int0(box)
+        rectArea = rect[1][0]*rect[1][1]
 
-                        rect = cv2.minAreaRect(cnt)
-                        box = cv2.boxPoints(rect)
-                        box = np.int0(box)
-                        rectArea = rect[1][0]*rect[1][1]
+        if rectArea*9 > imageArea:
 
-                        if rectArea*9 > imageArea:        
-                            # im = cv2.drawContours(image, [box], 0, (0,0,255), 20)
+            # rotate the image
+            picRectAngle = rect[2] + 90
+            if picRectAngle>=70:
+                picRectAngle = picRectAngle - 90
+            elif 20 < picRectAngle < 70:
+                picRectAngle = 0
 
-                            # rotate the image
-                            picRectAngle = rect[2] + 90
-                            if picRectAngle>70:
-                                picRectAngle = picRectAngle - 90
-                            elif 20 < picRectAngle < 70:
-                                picRectAngle = 0
+            rot = cv2.getRotationMatrix2D((w/2, h/2), picRectAngle, 1)
+            result_img = cv2.warpAffine(copy.deepcopy(image), rot, (w, h), flags=cv2.INTER_LINEAR)
 
-                            rot = cv2.getRotationMatrix2D((w/2, h/2), picRectAngle, 1)
-                            result_img = cv2.warpAffine(copy.deepcopy(image), rot, (w, h), flags=cv2.INTER_LINEAR)
+            # rotate points
+            pts = np.int0(cv2.transform(np.array([box]), rot))[0]
 
-                            # rotate points
-                            pts = np.int0(cv2.transform(np.array([box]), rot))[0]
+            allXCord = [i[0] for i in pts]
+            allYCord = [i[1] for i in pts]
 
-                            allXCord = [i[0] for i in pts]
-                            allYCord = [i[1] for i in pts]
+            topLeftX, topLeftY = int(min(allXCord)), int(min(allYCord))
+            bottomRightX, bottomRightY = int(max(allXCord)), int(max(allYCord))
+            
+            img_crop = result_img[topLeftY:bottomRightY, topLeftX:bottomRightX]
 
-                            topLeftX, topLeftY = int(min(allXCord)), int(min(allYCord))
-                            bottomRightX, bottomRightY = int(max(allXCord)), int(max(allYCord))
-                            
-                            img_crop = result_img[topLeftY:bottomRightY, topLeftX:bottomRightX]
+            os.makedirs(imageFolderOutputPath, exist_ok=True)
+            
+            fileName = os.path.split(imageInputPath)[1]
+            newFileName = fileName.split(".")[0] + " - " + str(i) + ".jpg"
+            newImagePath = os.path.join(imageFolderOutputPath, newFileName)
+            
+            cv2.imwrite(newImagePath, img_crop)
 
-                            newImagePath = ".\\Output\\" + dirpath.split(".\\")[-1]
-                            os.makedirs(newImagePath, exist_ok=True)
-                            newImagePath = newImagePath + "\\" + eachFile.split(".png")[0] + " - " + str(i) + ".png"
-                            cv2.imwrite(newImagePath, img_crop)
-
-                            i = i + 1
+            i = i + 1
