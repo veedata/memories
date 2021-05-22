@@ -34,7 +34,7 @@ def dividedCrop(imageInputPath: str, imageFolderOutputPath: str) -> None:
         box = np.int0(box)
         rectArea = rect[1][0]*rect[1][1]
 
-        if rectArea*9 > imageArea:
+        if rectArea*200 > imageArea:
 
             # rotate the image
             picRectAngle = rect[2] + 90
@@ -67,13 +67,13 @@ def dividedCrop(imageInputPath: str, imageFolderOutputPath: str) -> None:
 
             i = i + 1
 
-def addDateTest(imageInputPath: str, newDate: str) -> None:
+def addDate(imageInputPath: str, newDate: str) -> None:
     """Add date when the image was originally taken
 
     @type imageInputPath: str
     @param imageInputPath: The path of the input image is to be passed
     @type newDate: str
-    @param newDate: The path of the folder where the output image(s) are to be saved
+    @param newDate: Date in the format "day/month/year"
     """
 
     try:
@@ -92,4 +92,18 @@ def addDateTest(imageInputPath: str, newDate: str) -> None:
         piexif.insert(exif_bytes, imagePath)
 
     except:
-        continue
+        pass
+
+def bulkAddDate(folderPath: str, newDate: str) -> None:
+    """Add date to all images in a folder
+
+    @type folderPath: str
+    @param folderPath: The path of folder
+    @type newDate: str
+    @param newDate: Date in the format "day/month/year"
+    """
+
+    for (dirpath, dirnames, filenames) in os.walk(folderPath):
+        for eachFile in filenames:
+            imagePath = os.path.join(dirpath, eachFile)
+            addDate(imagePath, newDate)
