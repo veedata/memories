@@ -8,7 +8,7 @@ setup(
     author = 'Viraj Thakkar',
     author_email = 'vdthakkar111@gmail.com',
     url = 'https://github.com/veedata/album-manager',
-    download_url = 'https://github.com/jrosebr1/imutils/tarball/0.1',
+    download_url = 'https://github.com/veedata/album-manager/archive/refs/tags/v0.1-alpha.tar.gz',
     keywords = ['computer vision', 'image processing', 'opencv'],
     install_requires=[
           'piexif',
