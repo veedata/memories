@@ -4,16 +4,19 @@ import numpy as np
 import math
 import copy
 
-def dividedCrop(imageInputPath: str, imageFolderOutputPath: str) -> None:
+def dividedCrop(imageInputPath: str, imageFolderOutputPath: str, imageQuantity: int = 4) -> None:
     """Divide a single image into multiple smaller ones. Uses background color
 
     @type imageInputPath: str
     @param imageInputPath: The path of the input image is to be passed
     @type imageFolderOutputPath: str
     @param imageFolderOutputPath: The path of the folder where the output image(s) are to be saved
+    @type imageQuantity: int
+    @param imagequantity: Number of images that are present in the pic
     """
 
     imagePath = imageInputPath
+    imageQuantity = imageQuantity + 5
     image = cv2.imread(imagePath)
 
     h, w, channels = image.shape
@@ -32,7 +35,7 @@ def dividedCrop(imageInputPath: str, imageFolderOutputPath: str) -> None:
         box = np.int0(box)
         rectArea = rect[1][0]*rect[1][1]
 
-        if rectArea*200 > imageArea:
+        if rectArea*imageQuantity > imageArea:
 
             # rotate the image
             picRectAngle = rect[2] + 90
