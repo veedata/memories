@@ -3,8 +3,6 @@ import cv2
 import numpy as np
 import math
 import copy
-import piexif
-from datetime import datetime
 
 def dividedCrop(imageInputPath: str, imageFolderOutputPath: str) -> None:
     """Divide a single image into multiple smaller ones. Uses background color
@@ -66,44 +64,3 @@ def dividedCrop(imageInputPath: str, imageFolderOutputPath: str) -> None:
             cv2.imwrite(newImagePath, img_crop)
 
             i = i + 1
-
-def addDate(imageInputPath: str, newDate: str) -> None:
-    """Add date when the image was originally taken
-
-    @type imageInputPath: str
-    @param imageInputPath: The path of the input image is to be passed
-    @type newDate: str
-    @param newDate: Date in the format "day/month/year"
-    """
-
-    try:
-        exif_dict = piexif.load(imageInputPath)
-        
-        newExifDate = datetime.strptime(newdate, '%d/%m/%Y')
-        newExifDate = newExifDate.strftime('%Y:%m:%d %H:%M:%S')
-        
-        exifDateToday = datetime.today()
-        exifDateToday = exifDateToday.strftime('%Y:%m:%d %H:%M:%S')
-
-        exif_dict['Exif'][piexif.ExifIFD.DateTimeOriginal] = newExifDate
-        exif_dict['Exif'][piexif.ExifIFD.DateTimeDigitized] = exifDateToday
-        
-        exif_bytes = piexif.dump(exif_dict)
-        piexif.insert(exif_bytes, imagePath)
-
-    except:
-        pass
-
-def bulkAddDate(folderPath: str, newDate: str) -> None:
-    """Add date to all images in a folder
-
-    @type folderPath: str
-    @param folderPath: The path of folder
-    @type newDate: str
-    @param newDate: Date in the format "day/month/year"
-    """
-
-    for (dirpath, dirnames, filenames) in os.walk(folderPath):
-        for eachFile in filenames:
-            imagePath = os.path.join(dirpath, eachFile)
-            addDate(imagePath, newDate)
