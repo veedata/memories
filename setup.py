@@ -3,7 +3,7 @@ from distutils.core import setup
 setup(
     name = 'memories',
     packages = ['memories'],
-    version = '0.1',
+    version = '0.2',
     description = 'A library that will seperate images from an input containing multiple images and simply the process of addition of metadata to images.',
     author = 'Viraj Thakkar',
     author_email = 'vdthakkar111@gmail.com',
