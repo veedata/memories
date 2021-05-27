@@ -4,7 +4,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name = 'memories-veedata',
+    name = 'memories',
     version = '0.2',
     description = 'A library for those who want to convert their older images into digitised format (with metadata), and beautify them using borders and other options.',
     author = 'Viraj Thakkar',
