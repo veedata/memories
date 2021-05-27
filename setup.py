@@ -4,7 +4,7 @@ setup(
     name = 'memories',
     packages = ['memories'],
     version = '0.2',
-    description = 'A library that will seperate images from an input containing multiple images and simply the process of addition of metadata to images.',
+    description = 'A library for those who want to convert their older images into digitised format (with metadata), and beautify them using borders and other options.',
     author = 'Viraj Thakkar',
     author_email = 'vdthakkar111@gmail.com',
     url = 'https://github.com/veedata/album-manager',
