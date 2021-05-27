@@ -1,5 +1,5 @@
-__version__ = "0.1"
+__version__ = "0.2"
 
-from .memories import dividedCrop
-from .memories import addDate
-from .memories import bulkAddDate
+from .divider import dividedCrop
+from .meta import addDate
+from .meta import bulkAddDate
