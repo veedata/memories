@@ -13,12 +13,12 @@ Features
 ------
 
 Current features that are present are: 
-* Crop out basic implementation
-* Add Date and time metadata 
+*  Crop out basic implementation
+*  Add Date and time metadata 
 
 Future features can also be found at https://github.com/veedata/album-manager/projects/1:
-* Border
-* Collage
-* Save as PDF (idk why, just an idea)
-* Image Age identifyer
-* Documentation
+*  Border
+*  Collage
+*  Save as PDF (idk why, just an idea)
+*  Image Age identifyer
+*  Documentation
