@@ -1,6 +1,9 @@
 Memories
 ======
 
+[![PyPi](https://img.shields.io/pypi/v/memories.svg)](https://pypi.org/project/memories/)
+[![Downloads](https://pepy.tech/badge/memories)](https://pepy.tech/project/memories)
+[![License](https://img.shields.io/github/license/veedata/album-manager)](https://github.com/veedata/album-manager/blob/main/LICENSE.txt)
 
 Description
 ------
