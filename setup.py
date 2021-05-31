@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name = 'memories',
-    version = '0.2',
+    version = '0.3',
     url = 'https://github.com/veedata/album-manager',
     download_url = 'https://github.com/veedata/album-manager/archive/refs/tags/v0.2-alpha.tar.gz',
     author = 'Viraj Thakkar',
@@ -20,6 +20,7 @@ setuptools.setup(
     install_requires=[
           'piexif',
           'opencv-python',
+          'Pillow',
       ],
     classifiers=[
         'Operating System :: OS Independent',
