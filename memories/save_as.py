@@ -1,4 +1,4 @@
-import PIL
+from PIL import Image
 import os
 
 def saveAsPDF(imageList: list, outputFilePath: str) -> None:
@@ -12,9 +12,9 @@ def saveAsPDF(imageList: list, outputFilePath: str) -> None:
     
     openImgList = []
     for eachPath in imageList:
-        openImgList.append(PIL.Image.open(eachPath).convert("RGB"))
+        openImgList.append(Image.open(eachPath).convert("RGB"))
     
-    openImgList[0].save(outputFilePath, "PDF", resolution=100.0, save_all=True, append_images=openImgList)
+    openImgList[0].save(outputFilePath, "PDF", resolution=100.0, save_all=True, append_images=openImgList[1:])
 
 def saveAsPNG(inputImagepath: str, outputImagePath: str) -> None:
     """Save an image as a png file
@@ -29,7 +29,7 @@ def saveAsPNG(inputImagepath: str, outputImagePath: str) -> None:
     imageName = imageName.split(".")[0] + ".png"
     outputImagePath = os.path.join(outputImagePath, imageName)
 
-    image = PIL.Image.open(inputImagepath).convert("RGB")
+    image = Image.open(inputImagepath).convert("RGB")
     image.save(outputImagePath)
 
 def saveAsJPG(inputImagepath: str, outputImagePath: str) -> None:
@@ -43,7 +43,8 @@ def saveAsJPG(inputImagepath: str, outputImagePath: str) -> None:
     
     imageName = os.path.split(inputImagepath)[1]
     imageName = imageName.split(".")[0] + ".jpg"
-    outputImagePath = os.path.join(outputImagePath, os.path.split(inputImagepath)[1])
+    outputImagePath = os.path.join(outputImagePath, imageName)
 
-    image = PIL.Image.open(inputImagepath).convert("RGB")
+    image = Image.open(inputImagepath).convert("RGB")
+    print(outputImagePath)
     image.save(outputImagePath)
