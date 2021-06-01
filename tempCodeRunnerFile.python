@@ -1,3 +1,0 @@
-import memories.save_as as sa
-
-sa.saveAsPDF(["D:\\Downloads\\COMRADE Poster (1).png"], "D:\\Downloads\\COMRADE_post.pdf")
