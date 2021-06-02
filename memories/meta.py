@@ -1,6 +1,7 @@
 import os
 import piexif
 from datetime import datetime
+import logging
 
 def addDate(imageInputPath: str, newDateTime: str) -> None:
     """Add date when the image was originally taken
@@ -25,8 +26,9 @@ def addDate(imageInputPath: str, newDateTime: str) -> None:
         
         exif_bytes = piexif.dump(exif_dict)
         piexif.insert(exif_bytes, imageInputPath)
-
-    except:
+    except Exception as ex:
+        logging.error("Exception " + str(ex) + " occurred", exc_info=True)
+    except BaseException:
         pass
 
 def bulkAddDate(folderPath: str, newDateTime: str) -> None:

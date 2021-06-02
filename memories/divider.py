@@ -1,7 +1,6 @@
 import os
 import cv2
 import numpy as np
-import math
 import copy
 
 def dividedCrop(imageInputPath: str, imageFolderOutputPath: str, imageQuantity: int = 4) -> None:
@@ -28,7 +27,6 @@ def dividedCrop(imageInputPath: str, imageFolderOutputPath: str, imageQuantity: 
     contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
     i = 1
     for cnt in contours:
-        contourArea = cv2.contourArea(cnt)
 
         rect = cv2.minAreaRect(cnt)
         box = cv2.boxPoints(rect)
@@ -39,10 +37,8 @@ def dividedCrop(imageInputPath: str, imageFolderOutputPath: str, imageQuantity: 
 
             # rotate the image
             picRectAngle = rect[2] + 90
-            if picRectAngle>=70:
+            if picRectAngle>=45:
                 picRectAngle = picRectAngle - 90
-            elif 20 < picRectAngle < 70:
-                picRectAngle = 0
 
             rot = cv2.getRotationMatrix2D((w/2, h/2), picRectAngle, 1)
             result_img = cv2.warpAffine(copy.deepcopy(image), rot, (w, h), flags=cv2.INTER_LINEAR)
