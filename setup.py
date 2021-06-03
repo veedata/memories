@@ -7,7 +7,7 @@ setuptools.setup(
     name = 'memories',
     version = '0.3',
     url = 'https://github.com/veedata/album-manager',
-    download_url = 'https://github.com/veedata/album-manager/archive/refs/tags/v0.2-alpha.tar.gz',
+    download_url = 'https://github.com/veedata/album-manager/archive/refs/tags/v0.4-alpha.tar.gz',
     author = 'Viraj Thakkar',
     author_email = 'vdthakkar111@gmail.com',
     description = 'A library for those who want to convert their older images into digitised format (with metadata), and beautify them using borders and other options.',
