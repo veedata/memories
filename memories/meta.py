@@ -28,7 +28,7 @@ def addDate(imageInputPath: str, newDateTime: str) -> None:
         piexif.insert(exif_bytes, imageInputPath)
     except Exception as ex:
         logging.error("Exception " + str(ex) + " occurred", exc_info=True)
-    except BaseException:
+    except SystemExit:
         pass
 
 def bulkAddDate(folderPath: str, newDateTime: str) -> None:

@@ -4,6 +4,7 @@ Memories
 [![PyPi](https://img.shields.io/pypi/v/memories.svg)](https://pypi.org/project/memories/)
 [![Downloads](https://pepy.tech/badge/memories)](https://pepy.tech/project/memories)
 [![License](https://img.shields.io/github/license/veedata/album-manager)](https://github.com/veedata/album-manager/blob/main/LICENSE.txt)
+[![Language grade: Python](https://img.shields.io/lgtm/grade/python/github/veedata/album-manager)](https://lgtm.com/projects/g/veedata/album-manager/context:python)
 
 Description
 ------
@@ -18,7 +19,7 @@ Installation
 How to Use:
 ------
 There are 6 functions at the time being:
-* ``memories.dividedCrop``: Takes 3 inputs, the path to the image, the path where the outful folder should be and the number of images present in the input file. It performs the task of dividing a single image into multiple smaller ones. 
+* ``dividedCrop``: Takes 3 inputs, the path to the image, the path where the outful folder should be and the number of images present in the input file. It performs the task of dividing a single image into multiple smaller ones. 
 * ``addDate``: Taken input as the image path and the datetime to be added. it will add date when the image was originally taken.
 * ``bulkAddDate``: Same as addDate, except it will add date to all images in a folder. The inputs are the folder path and datetime.
 * ``saveAsPDF``: Converts a list of images (one or more) into a PDF
