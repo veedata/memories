@@ -48,10 +48,11 @@ Current features that are present are:
 3. Save as PDF, PNG, JPG
 
 Future features can also be found at https://github.com/veedata/album-manager/projects/1:
-1. Border
-2. Collage
-3. Image Age identifyer
-4. Documentation
+1. Scrapbook pages generation
+2. Border
+3. Collage
+4. Image Age identifyer
+5. Documentation
 
 License
 ------
