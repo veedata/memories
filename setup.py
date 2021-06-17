@@ -5,9 +5,9 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name = 'memories',
-    version = '0.3',
+    version = '0.4',
     url = 'https://github.com/veedata/album-manager',
-    download_url = 'https://github.com/veedata/album-manager/archive/refs/tags/v0.4-alpha.tar.gz',
+    download_url = 'https://github.com/veedata/album-manager/archive/refs/tags/v0.4-beta.tar.gz',
     author = 'Viraj Thakkar',
     author_email = 'vdthakkar111@gmail.com',
     description = 'A library for those who want to convert their older images into digitised format (with metadata), and beautify them using borders and other options.',
@@ -24,7 +24,7 @@ setuptools.setup(
       ],
     classifiers=[
         'Operating System :: OS Independent',
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - beta',
         'Intended Audience :: Developers',
         "License :: OSI Approved :: MIT License",
     ],
