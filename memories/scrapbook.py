@@ -12,19 +12,30 @@ def makePage(imageList: list, nameList: list, tagList: list):
     @param tagList: List of short line put in the HTML
     """
 
-    if len(imageList) == len(nameList) == len(tagList):
-        pass
-    else:
+    if not(len(imageList) == len(nameList) == len(tagList)):
         logging.error("Oof, input lengths aint same")
 
-    f = open('scrapbook.html', 'w')
+    f = open('./scrapbook.html', 'w')
 
     dynamicText = ""
-    # To Do, a lot to do
-    for i in len(imageList):
-        dynamicText = dynamicText + imageList[i]
 
-    staticText = """
+    for i in len(imageList):
+        thisText = f'''
+            <div class="col">
+                <div class="card h-100 border-primary">
+                    <div style="padding: 1em;">
+                        <img src="{imageList[i]}" class="rounded-3 card-img-top" alt="...">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{nameList[i]}</h5>
+                        <p class="card-text">{tagList[i]}</p>
+                    </div>
+                </div>
+            </div>'''
+        dynamicText = dynamicText + thisText
+
+    
+    staticText = f"""
             <!doctype html>
             <html lang="en">
 
@@ -36,13 +47,6 @@ def makePage(imageList: list, nameList: list, tagList: list):
                     integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 
                 <title>A Scrapbook Page</title>
-
-                <!-- <style>
-                    html, body {
-                        height:297mm;
-                        width:210mm;
-                    }
-                </style> -->
             </head>
 
             <body>
@@ -50,19 +54,19 @@ def makePage(imageList: list, nameList: list, tagList: list):
                     integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
                     crossorigin="anonymous"></script>
 
+                <br>
+                <br>
+
                 <div class="container">
 
                     <div class="row row-cols-1 row-cols-md-3 g-4">
-                        <div class="col">
-                            <div class="card h-100">
-                                <img src="image_path" class="card-img-top rounded-2" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title">Person Name</h5>
-                                    <p class="card-text">A short one-line.</p>
-                                </div>
-                            </div>
-                        </div>
+                        {dynamicText}
+                    </div>
                 </div>
+
+                <br>
+                <br>
+
             </body>
 
             </html>
