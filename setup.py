@@ -24,7 +24,7 @@ setuptools.setup(
       ],
     classifiers=[
         'Operating System :: OS Independent',
-        'Development Status :: 4 - Beta,
+        'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
         "License :: OSI Approved :: MIT License",
     ],
