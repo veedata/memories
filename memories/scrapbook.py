@@ -1,7 +1,8 @@
 import os
 import logging
+import sys
 
-def makePage(imageList: list, nameList: list, tagList: list):
+def makePage(imageList: list, nameList: list, tagList: list, outputPath: str):
     """Save a list of images in PDF format
 
     @type imageList: list
@@ -10,16 +11,19 @@ def makePage(imageList: list, nameList: list, tagList: list):
     @param nameList: List of names to be put in the HTML    
     @type tagList: list
     @param tagList: List of short line put in the HTML
+    @type outputPath: str
+    @param outputPath: save path to the folder
     """
 
     if not(len(imageList) == len(nameList) == len(tagList)):
-        logging.error("Oof, input lengths aint same")
+        logging.error("The lengths of the inputs differ")
+        sys.exit(1)
 
-    f = open('./scrapbook.html', 'w')
+    f = open(outputPath + '/scrapbook.html', 'w')
 
     dynamicText = ""
 
-    for i in len(imageList):
+    for i in range(len(imageList)):
         thisText = f'''
             <div class="col">
                 <div class="card h-100 border-primary">
