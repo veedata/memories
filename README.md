@@ -25,6 +25,7 @@ There are 6 functions at the time being:
 * ``saveAsPDF``: Converts a list of images (one or more) into a PDF
 * ``saveAsPNG``: Converts a single image into PNG format
 * ``saveAsJPG``: Converts a single image into JPG format
+* ``makePage``: Creates a year book like page in HTML
 
 Example
 ------
@@ -37,6 +38,7 @@ Example
     memories.saveAsPDF(["./source_folder/image1.png", "./random/another_source_folder/image2.jpg"], "./save_folder/file.pdf")
     memories.saveAsPNG("./source_folder/image1.jpg", "./output_folder")
     memories.saveAsJPG("./source_folder/image1.png", "./output_folder")
+    memories.makePage(["./source_folder/image1.png", "./random/another_source_folder/image2.jpg"], ["CSS", "Larry"], ["SASS", "That one got to you, didnt it"], "./save_folder")
 
 
 Features
@@ -46,13 +48,13 @@ Current features that are present are:
 1. Crop out basic implementation
 2. Add Date and time metadata 
 3. Save as PDF, PNG, JPG
+4. Basic Scrapbook implmentation
 
 Future features can also be found at https://github.com/veedata/album-manager/projects/1:
-1. Scrapbook pages generation
-2. Border
-3. Collage
-4. Image Age identifyer
-5. Documentation
+1. Border
+2. Collage
+3. Image Age identifyer
+4. Documentation
 
 License
 ------
