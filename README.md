@@ -4,6 +4,7 @@ Memories
 [![PyPi](https://img.shields.io/pypi/v/memories.svg)](https://pypi.org/project/memories/)
 [![Downloads](https://pepy.tech/badge/memories)](https://pepy.tech/project/memories)
 [![License](https://img.shields.io/github/license/veedata/album-manager)](https://github.com/veedata/album-manager/blob/main/LICENSE.txt)
+[![Language grade: Python](https://img.shields.io/lgtm/grade/python/github/veedata/album-manager)](https://lgtm.com/projects/g/veedata/album-manager/context:python)
 
 Description
 ------
@@ -18,12 +19,13 @@ Installation
 How to Use:
 ------
 There are 6 functions at the time being:
-* ``memories.dividedCrop``: Takes 3 inputs, the path to the image, the path where the outful folder should be and the number of images present in the input file. It performs the task of dividing a single image into multiple smaller ones. 
+* ``dividedCrop``: Takes 3 inputs, the path to the image, the path where the outful folder should be and the number of images present in the input file. It performs the task of dividing a single image into multiple smaller ones. 
 * ``addDate``: Taken input as the image path and the datetime to be added. it will add date when the image was originally taken.
 * ``bulkAddDate``: Same as addDate, except it will add date to all images in a folder. The inputs are the folder path and datetime.
 * ``saveAsPDF``: Converts a list of images (one or more) into a PDF
 * ``saveAsPNG``: Converts a single image into PNG format
 * ``saveAsJPG``: Converts a single image into JPG format
+* ``makePage``: Creates a year book like page in HTML
 
 Example
 ------
@@ -36,6 +38,7 @@ Example
     memories.saveAsPDF(["./source_folder/image1.png", "./random/another_source_folder/image2.jpg"], "./save_folder/file.pdf")
     memories.saveAsPNG("./source_folder/image1.jpg", "./output_folder")
     memories.saveAsJPG("./source_folder/image1.png", "./output_folder")
+    memories.makePage(["./source_folder/image1.png", "./random/another_source_folder/image2.jpg"], ["CSS", "Larry"], ["SASS", "That one got to you, didnt it"], "./save_folder")
 
 
 Features
@@ -45,6 +48,7 @@ Current features that are present are:
 1. Crop out basic implementation
 2. Add Date and time metadata 
 3. Save as PDF, PNG, JPG
+4. Basic Scrapbook implmentation
 
 Future features can also be found at https://github.com/veedata/album-manager/projects/1:
 1. Border
