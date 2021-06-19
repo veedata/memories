@@ -19,7 +19,8 @@ def makePage(imageList: list, nameList: list, tagList: list, outputPath: str):
         logging.error("The lengths of the inputs differ")
         sys.exit(1)
 
-    f = open(outputPath + '/scrapbook.html', 'w')
+    outputFilePath = os.path.join(outputPath, 'scrapbook.html')
+    f = open(outputFilePath, 'w')
 
     dynamicText = ""
 
