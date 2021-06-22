@@ -5,14 +5,14 @@ import sys
 def makePage(imageList: list, nameList: list, tagList: list, outputPath: str):
     """Save a list of images in PDF format
 
-    @type imageList: list
-    @param imageList: List of path to all images to be put in the HTML
-    @type nameList: list
-    @param nameList: List of names to be put in the HTML    
-    @type tagList: list
-    @param tagList: List of short line put in the HTML
-    @type outputPath: str
-    @param outputPath: save path to the folder
+    :param imageList: List of path to all images to be put in the HTML
+    :type imageList: list
+    :param nameList: List of names to be put in the HTML    
+    :type nameList: list
+    :param tagList: List of short line put in the HTML
+    :type tagList: list
+    :param outputPath: save path to the folder
+    :type outputPath: str
     """
 
     if not(len(imageList) == len(nameList) == len(tagList)):

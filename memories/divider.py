@@ -6,12 +6,12 @@ import copy
 def dividedCrop(imageInputPath: str, imageFolderOutputPath: str, imageQuantity: int = 4) -> None:
     """Divide a single image into multiple smaller ones. Uses background color
 
-    @type imageInputPath: str
-    @param imageInputPath: The path of the input image is to be passed
-    @type imageFolderOutputPath: str
-    @param imageFolderOutputPath: The path of the folder where the output image(s) are to be saved
-    @type imageQuantity: int
-    @param imagequantity: Number of images that are present in the pic
+    :param imageInputPath: The path of the input image is to be passed
+    :type imageInputPath: str
+    :param imageFolderOutputPath: The path of the folder where the output image(s) are to be saved
+    :type imageFolderOutputPath: str
+    :param imageQuantity: Number of images that are present in the pic
+    :type imageQuantity: int, optional
     """
 
     imagePath = imageInputPath

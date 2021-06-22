@@ -6,10 +6,10 @@ import logging
 def addDate(imageInputPath: str, newDateTime: str) -> None:
     """Add date when the image was originally taken
 
-    @type imageInputPath: str
-    @param imageInputPath: The path of the input image is to be passed
-    @type newDateTime: str
-    @param newDateTime: Date in the format "day/month/year hours:mins:secs"
+    :param imageInputPath: The path of the input image is to be passed
+    :type imageInputPath: str
+    :param newDateTime: Date in the format "day/month/year hours:mins:secs"
+    :type newDateTime: str
     """
 
     try:
@@ -34,10 +34,10 @@ def addDate(imageInputPath: str, newDateTime: str) -> None:
 def bulkAddDate(folderPath: str, newDateTime: str) -> None:
     """Add date to all images in a folder
 
-    @type folderPath: str
-    @param folderPath: The path of folder
-    @type newDateTime: str
-    @param newDateTime: Date in the format "day/month/year hours:mins:secs"
+    :param folderPath: The path of folder
+    :type folderPath: str
+    :param newDateTime: Date in the format "day/month/year hours:mins:secs"
+    :type newDateTime: str
     """
 
     for (dirpath, dirnames, filenames) in os.walk(folderPath):

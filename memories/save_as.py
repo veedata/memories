@@ -4,10 +4,10 @@ import os
 def saveAsPDF(imageList: list, outputFilePath: str) -> None:
     """Save a list of images in PDF format
 
-    @type imageList: list
-    @param imageList: List of path to all images to be saved
-    @type outputFilePath: str
-    @param outputFilePath: The path (including file name) where the output PDF is to be saved
+    :param imageList: List of path to all images to be saved
+    :type imageList: list
+    :param outputFilePath: The path (including file name) where the output PDF is to be saved
+    :type outputFilePath: str
     """
     
     openImgList = []
@@ -19,10 +19,10 @@ def saveAsPDF(imageList: list, outputFilePath: str) -> None:
 def saveAsPNG(inputImagepath: str, outputImagePath: str) -> None:
     """Save an image as a png file
 
-    @type inputImagepath: str
-    @param inputImagepath: Path to image to be saved
-    @type outputImagePath: str
-    @param outputImagePath: The path where the output file is to be saved
+    :param inputImagepath: Path to image to be saved
+    :type inputImagepath: str
+    :param outputImagePath: The path where the output file is to be saved
+    :type outputImagePath: str
     """
     
     imageName = os.path.split(inputImagepath)[1]
@@ -35,10 +35,10 @@ def saveAsPNG(inputImagepath: str, outputImagePath: str) -> None:
 def saveAsJPG(inputImagepath: str, outputImagePath: str) -> None:
     """Save an image as a jpg file
 
-    @type inputImagepath: str
-    @param inputImagepath: Path to image to be saved
-    @type outputImagePath: str
-    @param outputImagePath: The path where the output file is to be saved
+    :param inputImagepath: Path to image to be saved
+    :type inputImagepath: str
+    :param outputImagePath: The path where the output file is to be saved
+    :type outputImagePath: str
     """
     
     imageName = os.path.split(inputImagepath)[1]
