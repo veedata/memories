@@ -2,9 +2,10 @@ Memories
 ======
 
 [![PyPi](https://img.shields.io/pypi/v/memories.svg)](https://pypi.org/project/memories/)
-[![Downloads](https://pepy.tech/badge/memories)](https://pepy.tech/project/memories)
+[![Documentation Status](https://readthedocs.org/projects/memories/badge/?version=latest)](https://memories.readthedocs.io/en/latest/?badge=latest)
 [![License](https://img.shields.io/github/license/veedata/album-manager)](https://github.com/veedata/album-manager/blob/main/LICENSE.txt)
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/github/veedata/album-manager)](https://lgtm.com/projects/g/veedata/album-manager/context:python)
+[![Downloads](https://pepy.tech/badge/memories)](https://pepy.tech/project/memories)
 
 Description
 ------
