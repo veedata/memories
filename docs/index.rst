@@ -6,15 +6,19 @@
 Welcome to memories's documentation!
 ====================================
 
+Memories is an easy to use package that helps to seperate clustered images from files and helps add metadata to files. The documentation is in progress and will be present in the ``\docs`` directory of the project in the future. For the time being the following steps should be an adequate description of all functions present.
+
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Overview:
 
-   modules
-
-Indices and tables
-==================
+   modules/
+   pages/getting-started
+   
+Links
+=====
 
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+* Source code: https://github.com/veedata/memories
