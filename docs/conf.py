@@ -24,9 +24,9 @@ copyright = '2021, Viraj Thakkar'
 author = 'Viraj Thakkar'
 
 # The short X.Y version
-version = ''
+version = '0.5'
 # The full version, including alpha/beta/rc tags
-release = ''
+release = '0.5-beta'
 
 
 # -- General configuration ---------------------------------------------------
@@ -42,6 +42,7 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.todo',
     'sphinx.ext.coverage',
+    'sphinx.ext.viewcode',
     'sphinx.ext.githubpages',
 ]
 
@@ -183,3 +184,5 @@ epub_exclude_files = ['search.html']
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = True
+
+add_module_names = False
