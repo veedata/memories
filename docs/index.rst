@@ -12,9 +12,9 @@ Memories is an easy to use package that helps to seperate clustered images from 
    :maxdepth: 2
    :caption: Overview:
 
-   modules/
    pages/getting-started
-   
+   modules/
+
 Links
 =====
 
