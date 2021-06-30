@@ -6,16 +6,17 @@ with open("README.md", "r", encoding="utf-8") as fh:
 setuptools.setup(
     name = 'memories',
     version = '0.5',
-    url = 'https://github.com/veedata/album-manager',
-    download_url = 'https://github.com/veedata/album-manager/archive/refs/tags/v0.5-beta.tar.gz',
+    url = 'https://github.com/veedata/memories',
+    download_url = 'https://github.com/veedata/memories/archive/refs/tags/v0.5-beta.tar.gz',
     author = 'Viraj Thakkar',
     author_email = 'vdthakkar111@gmail.com',
     description = 'A library for those who want to convert their older images into digitised format (with metadata), and beautify them using borders and other options.',
     long_description=long_desc,
     keywords = ['computer vision', 'image processing', 'opencv', 'album'],
     project_urls={
-        "Code": "https://github.com/veedata/album-manager",
-        "Issue tracker": "https://github.com/veedata/album-manager/issues",
+        "Code": "https://github.com/veedata/memories",
+        "Issue tracker": "https://github.com/veedata/memories/issues",
+        'Documentation': "https://memories.readthedocs.io/en/latest",
     },
     install_requires=[
           'piexif',
