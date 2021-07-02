@@ -3,20 +3,28 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+
 Welcome to memories's documentation!
 ====================================
 
 Memories is an easy to use package that helps to seperate clustered images from files and helps add metadata to files. The documentation is in progress and will be present in the ``\docs`` directory of the project in the future. For the time being the following steps should be an adequate description of all functions present.
 
+
+First Steps
+-----------
+
+Let's get you started with the very basics of what all can be done with Memories, installing it and getting to know the software.
+
 .. toctree::
    :maxdepth: 2
-   :caption: Overview:
+   :caption: Getting Stated:
 
    pages/getting-started
-   modules/
+   pages/features
+
 
 Links
-=====
+-----
 
 * :ref:`genindex`
 * :ref:`modindex`
