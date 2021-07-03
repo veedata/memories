@@ -16,10 +16,23 @@ First Steps
 Let's get you started with the very basics of what all can be done with Memories, installing it and getting to know the software.
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Getting Stated:
+   :maxdepth: 1
+   :caption: Getting Started
+   :hidden:
 
    pages/getting-started
+
+
+Modules
+-------
+
+In progress
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Modules
+   :hidden:
+   
    pages/features
 
 

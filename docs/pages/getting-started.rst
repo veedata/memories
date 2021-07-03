@@ -3,7 +3,7 @@ Getting started
 ===============
 
 Installation
-============
+------------
 
 Install the Python package::
 
@@ -11,7 +11,7 @@ Install the Python package::
 
 
 How to Use
-===========
+----------
 
 There are 6 functions at the time being:
 
@@ -25,7 +25,7 @@ There are 6 functions at the time being:
 
 
 Example
-=======
+-------
 
 An example code for each appplication::
 
@@ -41,5 +41,5 @@ An example code for each appplication::
 
 
 License
-=======
+-------
 This software is released under the MIT license, see [LICENSE.txt](https://github.com/veedata/album-manager/blob/main/LICENSE.txt).
