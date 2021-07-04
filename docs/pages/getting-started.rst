@@ -42,4 +42,4 @@ An example code for each appplication::
 
 License
 -------
-This software is released under the MIT license, see [LICENSE.txt](https://github.com/veedata/album-manager/blob/main/LICENSE.txt).
+This software is released under the MIT license, see `LICENSE.txt <https://github.com/veedata/album-manager/blob/main/LICENSE.txt>`_.
