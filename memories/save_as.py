@@ -1,6 +1,14 @@
 from PIL import Image
 import os
 
+def openImage(inputImagepath, outputImagePath):
+    """Save a image in a different format
+    """
+    imageName = os.path.split(inputImagepath)[1]
+    image = Image.open(inputImagepath).convert("RGB")
+    imageName = imageName.split(".")[0]
+    return image, imageName
+
 def saveAsPDF(imageList: list, outputFilePath: str) -> None:
     """Save a list of images in PDF format
 
@@ -25,11 +33,9 @@ def saveAsPNG(inputImagepath: str, outputImagePath: str) -> None:
     :type outputImagePath: str
     """
     
-    imageName = os.path.split(inputImagepath)[1]
-    imageName = imageName.split(".")[0] + ".png"
-    outputImagePath = os.path.join(outputImagePath, imageName)
+    image, imageName = openImage(inputImagepath, outputImagePath)
 
-    image = Image.open(inputImagepath).convert("RGB")
+    outputImagePath = os.path.join(outputImagePath, imageName + ".png")
     image.save(outputImagePath)
 
 def saveAsJPG(inputImagepath: str, outputImagePath: str) -> None:
@@ -41,10 +47,7 @@ def saveAsJPG(inputImagepath: str, outputImagePath: str) -> None:
     :type outputImagePath: str
     """
     
-    imageName = os.path.split(inputImagepath)[1]
-    imageName = imageName.split(".")[0] + ".jpg"
-    outputImagePath = os.path.join(outputImagePath, imageName)
+    image, imageName = openImage(inputImagepath, outputImagePath)
 
-    image = Image.open(inputImagepath).convert("RGB")
-    print(outputImagePath)
+    outputImagePath = os.path.join(outputImagePath, imageName + ".jpg")
     image.save(outputImagePath)
