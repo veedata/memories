@@ -1,8 +1,11 @@
 from PIL import Image
 import os
 
-def openImage(inputImagepath, outputImagePath):
-    """Save a image in a different format
+def openImage(inputImagepath):
+    """Takes an image path as input and returns the file name of the image and opened image to the user. Can be then used fo rfurther processing or to save in any format required. 
+    
+    :param inputImagepath: Path to image to be saved
+    :type inputImagepath: str
     """
     imageName = os.path.split(inputImagepath)[1]
     image = Image.open(inputImagepath).convert("RGB")
@@ -33,7 +36,7 @@ def saveAsPNG(inputImagepath: str, outputImagePath: str) -> None:
     :type outputImagePath: str
     """
     
-    image, imageName = openImage(inputImagepath, outputImagePath)
+    image, imageName = openImage(inputImagepath)
 
     outputImagePath = os.path.join(outputImagePath, imageName + ".png")
     image.save(outputImagePath)
@@ -47,7 +50,7 @@ def saveAsJPG(inputImagepath: str, outputImagePath: str) -> None:
     :type outputImagePath: str
     """
     
-    image, imageName = openImage(inputImagepath, outputImagePath)
+    image, imageName = openImage(inputImagepath)
 
     outputImagePath = os.path.join(outputImagePath, imageName + ".jpg")
     image.save(outputImagePath)
