@@ -21,19 +21,13 @@ Let's get you started with the very basics of what all can be done with Memories
    :hidden:
 
    pages/getting-started
+   pages/features
 
 
 Modules
 -------
 
-In progress
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Modules
-   :hidden:
-   
-   pages/features
+Individual modules will be described with examples over here. Needs to be further developed for now. 
 
 
 Links
