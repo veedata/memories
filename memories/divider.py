@@ -3,7 +3,7 @@ import cv2
 import numpy as np
 import copy
 
-def dividedCrop(imageInputPath: str, imageFolderOutputPath: str, imageQuantity: int = 4) -> None:
+def dividedCrop(imageInputPath: str, imageFolderOutputPath: str, imageQuantity: int = 4, hsvVal: tuple = None) -> None:
     """Divide a single image into multiple smaller ones. Uses background color
 
     :param imageInputPath: The path of the input image is to be passed
@@ -12,6 +12,8 @@ def dividedCrop(imageInputPath: str, imageFolderOutputPath: str, imageQuantity: 
     :type imageFolderOutputPath: str
     :param imageQuantity: Number of images that are present in the pic
     :type imageQuantity: int, optional
+    :param hsvVal: The HSV value of the background
+    :type hsvVal: tuple, optional
     """
 
     imagePath = imageInputPath
@@ -21,8 +23,14 @@ def dividedCrop(imageInputPath: str, imageFolderOutputPath: str, imageQuantity: 
     h, w, channels = image.shape
     imageArea = h*w
 
-    imageRot_grey = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    ret, thresh = cv2.threshold(imageRot_grey, 205, 255, cv2.THRESH_BINARY_INV)
+    if hsvVal:
+        imageRot_hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+        thresh = cv2.inRange(imageRot_hsv, (hsvVal[0]-5, hsvVal[1]-25, hsvVal[2]-15), (hsvVal[0]-5, hsvVal[1]+25, hsvVal[2]+15))
+        cv2.imwrite("dcj.jpg", thresh)
+        cv2.imwrite("dcjdw.jpg", imageRot_hsv)
+    else:
+        imageRot_grey = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        ret, thresh = cv2.threshold(imageRot_grey, 205, 255, cv2.THRESH_BINARY_INV)
 
     contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
     i = 1
