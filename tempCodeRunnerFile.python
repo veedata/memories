@@ -1,3 +1,0 @@
-import memories as mem
-
-mem.dividedCrop("D:\\Downloads\\ScanNDiv\\test.png", "D:\\Downloads\\ScanNDiv", 6, (5,170,230))
