@@ -4,7 +4,7 @@ Features
 Divide Image groups 
 -------------------
 
-Converting hard copies of images into their soft copies usually leads to more than a single image being scanned on the same page. And while many devices have an inbuilt option to divide that scan into multiple images, some don't. This module has been built keeping that scenario in mind. The module divides a scan into it's member images based on background color. 
+Converting hard copies of images into their soft copies usually leads to more than a single image being scanned on the same page. And while many devices have an inbuilt option to divide that scan into multiple images, some don't. This module has been built keeping that scenario in mind. The module divides a scan into it's member images based on background color also if provided. 
 
 .. automodule:: memories.divider
     :members:

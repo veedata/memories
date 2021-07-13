@@ -12,7 +12,7 @@ def dividedCrop(imageInputPath: str, imageFolderOutputPath: str, imageQuantity: 
     :type imageFolderOutputPath: str
     :param imageQuantity: Number of images that are present in the pic
     :type imageQuantity: int, optional
-    :param bgrVal: The HSV value of the background in a list
+    :param bgrVal: The BGR value of the background in a list
     :type bgrVal: list, optional
     """
 
@@ -32,7 +32,7 @@ def dividedCrop(imageInputPath: str, imageFolderOutputPath: str, imageQuantity: 
         upperThreshVals = (min(int(hsvVal[0])+5, 180), min(int(hsvVal[1])+20, 255), min(int(hsvVal[2])+25, 255))
         
         thresh = cv2.inRange(imageRot_hsv, lowerThreshVals, upperThreshVals)
-        
+
     else:
         imageRot_grey = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         ret, thresh = cv2.threshold(imageRot_grey, 205, 255, cv2.THRESH_BINARY_INV)
