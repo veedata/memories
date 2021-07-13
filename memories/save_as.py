@@ -7,10 +7,10 @@ def openImage(inputImagepath):
     :param inputImagepath: Path to image to be saved
     :type inputImagepath: str
     """
-    imageName = os.path.split(inputImagepath)[1]
     image = Image.open(inputImagepath).convert("RGB")
+    imagePath, imageName = os.path.split(inputImagepath)
     imageName = imageName.split(".")[0]
-    return image, imageName
+    return image, imagePath, imageName
 
 def saveAsPDF(imageList: list, outputFilePath: str) -> None:
     """Save a list of images in PDF format
@@ -27,30 +27,16 @@ def saveAsPDF(imageList: list, outputFilePath: str) -> None:
     
     openImgList[0].save(outputFilePath, "PDF", resolution=100.0, save_all=True, append_images=openImgList[1:])
 
-def saveAsPNG(inputImagepath: str, outputImagePath: str) -> None:
+def saveAs(inputImagepath: str, outputImageformat: str) -> None:
     """Save an image as a png file
 
     :param inputImagepath: Path to image to be saved
     :type inputImagepath: str
-    :param outputImagePath: The path where the output file is to be saved
-    :type outputImagePath: str
+    :param outputImageformat: The extention in which the image is to be saved (jpg, png, tif...)
+    :type outputImageformat: str
     """
     
-    image, imageName = openImage(inputImagepath)
+    image, imagePath, imageName = openImage(inputImagepath)
 
-    outputImagePath = os.path.join(outputImagePath, imageName + ".png")
-    image.save(outputImagePath)
-
-def saveAsJPG(inputImagepath: str, outputImagePath: str) -> None:
-    """Save an image as a jpg file
-
-    :param inputImagepath: Path to image to be saved
-    :type inputImagepath: str
-    :param outputImagePath: The path where the output file is to be saved
-    :type outputImagePath: str
-    """
-    
-    image, imageName = openImage(inputImagepath)
-
-    outputImagePath = os.path.join(outputImagePath, imageName + ".jpg")
+    outputImagePath = os.path.join(imagePath, imageName + "." + outputImageformat)
     image.save(outputImagePath)
