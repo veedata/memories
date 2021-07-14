@@ -3,7 +3,7 @@ import cv2
 import numpy as np
 import copy
 
-def dividedCrop(imageInputPath: str, imageFolderOutputPath: str, imageQuantity: int = 6, bgrVal: list = None) -> None:
+def dividedCrop(imageInputPath: str, imageFolderOutputPath: str, imageQuantity: int = 6, bgrVal: list = [255, 255, 255]) -> None:
     """Divide a single image into multiple smaller ones. Uses background color
 
     :param imageInputPath: The path of the input image is to be passed
@@ -22,9 +22,12 @@ def dividedCrop(imageInputPath: str, imageFolderOutputPath: str, imageQuantity: 
 
     h, w, channels = image.shape
     imageArea = h*w
+    borderDim = max(image.shape[0], image.shape[1]) // 100
 
-    if bgrVal:
+    if bgrVal != [255, 255, 255]:
+        image = cv2.copyMakeBorder(image, borderDim, borderDim, borderDim, borderDim, cv2.BORDER_CONSTANT, value=bgrVal)
         bgrVal = np.uint8([[bgrVal]])
+
         hsvVal = list(cv2.cvtColor(bgrVal, cv2.COLOR_BGR2HSV)[0][0])
         imageRot_hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 
@@ -34,6 +37,9 @@ def dividedCrop(imageInputPath: str, imageFolderOutputPath: str, imageQuantity: 
         thresh = cv2.inRange(imageRot_hsv, lowerThreshVals, upperThreshVals)
 
     else:
+        # Soon to be retired part.. will be merged with above when smaller optimisations are made to the above code
+        image = cv2.copyMakeBorder(image, borderDim, borderDim, borderDim, borderDim, cv2.BORDER_CONSTANT, value=bgrVal)
+
         imageRot_grey = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         ret, thresh = cv2.threshold(imageRot_grey, 205, 255, cv2.THRESH_BINARY_INV)
 
@@ -72,7 +78,7 @@ def dividedCrop(imageInputPath: str, imageFolderOutputPath: str, imageQuantity: 
             fileName = os.path.split(imageInputPath)[1]
             newFileName = fileName.split(".")[0] + " - " + str(i) + ".jpg"
             newImagePath = os.path.join(imageFolderOutputPath, newFileName)
-            
+
             cv2.imwrite(newImagePath, img_crop)
 
             i = i + 1

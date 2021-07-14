@@ -24,7 +24,7 @@ Allows the addition of metadata to images (only jpg supported). The feature curr
 Save in other formats
 ---------------------
 
-Easy conversion of an image into other formats. Currently supported input formats can be found `here <https://pillow.readthedocs.io/en/stable/handbook/image-file-formats.html>`_. Output (save) formats are - jpg, png, pdf, where pdf saves multiple input images in a single pdf file.
+Easy conversion of an image into other formats. Currently supported input and output formats can be found `here <https://pillow.readthedocs.io/en/stable/handbook/image-file-formats.html>`_. Additionally saving to pdf can be performed, where pdf saves multiple input images in a single pdf file.
 
 .. automodule:: memories.save_as
     :members:
