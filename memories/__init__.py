@@ -6,3 +6,4 @@ from .meta import bulkAddDate
 from .save_as import saveAsPDF
 from .save_as import saveAs
 from .scrapbook import makePage
+from .border import makeBorder
