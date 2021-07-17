@@ -40,3 +40,13 @@ On input of name, short line and image, this function generates a year-book like
     :members:
     :undoc-members:
     :show-inheritance:
+
+Borders
+---------
+
+Make a border around an image. While support is limited over here, it is slated to increase over time, adding new options and developments to the same.
+
+.. automodule:: memories.border
+    :members:
+    :undoc-members:
+    :show-inheritance:
