@@ -21,6 +21,7 @@ There are 6 functions at the time being:
 - ``saveAsPDF``: Converts a list of images (one or more) into a PDF
 - ``saveAs``: Converts a single image into another format
 - ``makePage``: Creates a year book like page in HTML
+- ``makeBorder``: Creates a border around the image
 
 
 Example
@@ -36,6 +37,7 @@ An example code for each appplication::
     memories.saveAsPDF(["./source_folder/image1.png", "./random/another_source_folder/image2.jpg"], "./save_folder/file.pdf")
     memories.saveAs("./source_folder/image1.jpg", ".png")
     memories.makePage(["./source_folder/image1.png", "./random/another_source_folder/image2.jpg"], ["CSS", "Larry"], ["SASS", "That one got to you, didnt it"], "./save_folder")
+    memories.makeBorder("./image.png", "Solid", bgrVal = [255, 255, 255])
 
 
 License
