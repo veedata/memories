@@ -3,11 +3,6 @@ import piexif
 from datetime import datetime
 import logging
 
-class metaImage:
-
-    def __init__(self):
-        super().__init__()
-
 def addDate(imageInputPath: str, newDateTime: str) -> None:
     """Add date when the image was originally taken
 
