@@ -7,7 +7,7 @@
 Welcome to memories's documentation!
 ====================================
 
-Memories is an easy to use package that helps to seperate clustered images from files and helps add metadata to files. The documentation is in progress and will be present in the ``\docs`` directory of the project in the future. For the time being the following steps should be an adequate description of all functions present.
+Memories is an easy to use package that helps to seperate clustered images from files and helps add metadata to files. The following is a basic description of the package.
 
 
 First Steps
