@@ -2,7 +2,6 @@ import os
 import piexif
 from datetime import datetime
 import logging
-import binascii
 
 def addDate(imageInputPath: str, newDateTime: str) -> None:
     """Add date when the image was originally taken
@@ -47,7 +46,7 @@ def bulkAddDate(folderPath: str, newDateTime: str) -> None:
             addDate(imagePath, newDateTime)
 
 def addDatePNG(imageInputPath: str, newDateTime: str) -> None:
-    """Add date when the image was originally taken
+    """Add date when the image was originally taken for png images
 
     :param imageInputPath: The path of the input image is to be passed
     :type imageInputPath: str
@@ -62,10 +61,10 @@ def addDatePNG(imageInputPath: str, newDateTime: str) -> None:
     with open(imageInputPath, 'rb') as f:
         content = f.read()
 
-    byteStr = bytes("eXIf...%tEXtCreateDate." + newExifDate + "...", "utf-8")
+    byteStr = bytes("eXIf...%tEXtCreateDate." + newExifDate + "...IEND", "utf-8")
 
     brokenPNG = content.split(b"IEND")
     newPNG = brokenPNG[0] + byteStr + brokenPNG[1]
 
-    with open('test.png', 'wb') as p:
+    with open(imageInputPath+"-1.png", 'wb') as p:
         p.write(newPNG)
