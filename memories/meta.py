@@ -61,13 +61,11 @@ def addDatePNG(imageInputPath: str, newDateTime: str) -> None:
     
     with open(imageInputPath, 'rb') as f:
         content = f.read()
-    content = str(content)
-    
-    with open('test2.txt', 'w') as p:
-        p.write(content)
 
-    brokenPNG = content.split("IEND")
-    newPNG = brokenPNG[0] + "eXIf...%tEXtCreateDate." + newDateTime + "..." + brokenPNG[1]
+    byteStr = bytes("eXIf...%tEXtCreateDate." + newExifDate + "...", "utf-8")
 
-    with open('test.txt', 'w') as p:
+    brokenPNG = content.split(b"IEND")
+    newPNG = brokenPNG[0] + byteStr + brokenPNG[1]
+
+    with open('test.png', 'wb') as p:
         p.write(newPNG)
