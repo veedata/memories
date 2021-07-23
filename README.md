@@ -10,7 +10,7 @@ Memories
 Description
 ------
 
-Memories is an easy to use package that helps to seperate clustered images from files and helps add metadata to files. The documentation is in progress and will be present in the "``docs``" directory of the project in the future. For the time being the following steps should be an adequate description of all functions present.
+Memories is an easy to use package that helps to seperate clustered images from files and helps add metadata to files. The documentation is in progress and can be found [here](https://memories.readthedocs.io/en/latest).
 
 Installation
 ------
@@ -19,7 +19,7 @@ Installation
 
 How to Use:
 ------
-There are 6 functions at the time being:
+There are 7 functions at the time being:
 * ``dividedCrop``: Takes 3 inputs, the path to the image, the path where the outful folder should be and the number of images present in the input file. It performs the task of dividing a single image into multiple smaller ones. 
 * ``addDate``: Takes input as the image path and the datetime to be added. it will add date when the image was originally taken.
 * ``bulkAddDate``: Same as addDate, except it will add date to all images in a folder. The inputs are the folder path and datetime.

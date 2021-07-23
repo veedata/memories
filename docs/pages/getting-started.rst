@@ -13,7 +13,7 @@ Install the Python package::
 How to Use
 ----------
 
-There are 6 functions at the time being:
+There are 7 functions at the time being:
 
 - ``dividedCrop``: Takes 3 inputs, the path to the image, the path where the outful folder should be and the number of images present in the input file. It performs the task of dividing a single image into multiple smaller ones. 
 - ``addDate``: Takes input as the image path and the datetime to be added. it will add date when the image was originally taken.

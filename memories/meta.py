@@ -44,3 +44,27 @@ def bulkAddDate(folderPath: str, newDateTime: str) -> None:
         for eachFile in filenames:
             imagePath = os.path.join(dirpath, eachFile)
             addDate(imagePath, newDateTime)
+
+def addDatePNG(imageInputPath: str, newDateTime: str) -> None:
+    """Add date when the image was originally taken for png images
+
+    :param imageInputPath: The path of the input image is to be passed
+    :type imageInputPath: str
+    :param newDateTime: Date in the format "day/month/year hours:mins:secs"
+    :type newDateTime: str
+    """
+
+    # This is in testing for now
+    newExifDate = datetime.strptime(newDateTime, '%d/%m/%Y %H:%M:%S')
+    newExifDate = newExifDate.isoformat()
+    
+    with open(imageInputPath, 'rb') as f:
+        content = f.read()
+
+    byteStr = bytes("eXIf...%tEXtCreateDate." + newExifDate + "...IEND", "utf-8")
+
+    brokenPNG = content.split(b"IEND")
+    newPNG = brokenPNG[0] + byteStr + brokenPNG[1]
+
+    with open(imageInputPath+"-1.png", 'wb') as p:
+        p.write(newPNG)
