@@ -20,6 +20,7 @@ Let's get you started with the very basics of what all can be done with Memories
    :caption: Getting Started
    :hidden:
 
+   pages/about
    pages/getting-started
    pages/features
 
