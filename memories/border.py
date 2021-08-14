@@ -26,6 +26,11 @@ def makeBorder(imageInputPath: str, borderType: str = "normal", bgrVal: list = [
         image = cv2.cvtColor(image, cv2.COLOR_BGR2BGRA)
         image = cv2.copyMakeBorder(image, borderDimensions[0], borderDimensions[1], borderDimensions[2], borderDimensions[3], cv2.BORDER_CONSTANT, value=(255, 255, 255, 0))
 
+        if len(bgrVal) <= 3:
+            bgrVal.append(255)
+        else:
+            bgrVal[3] = 255
+
         top_left = (0, 0)
         bottom_right = (image.shape[0], image.shape[1])
 
