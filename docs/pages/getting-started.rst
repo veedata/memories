@@ -2,6 +2,12 @@
 Getting started
 ===============
 
+Requirements
+------------
+
+- Python 3.6+
+
+
 Installation
 ------------
 
@@ -39,7 +45,3 @@ An example code for each appplication::
     memories.makePage(["./source_folder/image1.png", "./random/another_source_folder/image2.jpg"], ["CSS", "Larry"], ["SASS", "That one got to you, didnt it"], "./save_folder")
     memories.makeBorder("./image.png", "Solid", bgrVal = [255, 255, 255])
 
-
-License
--------
-This software is released under the MIT license, see `LICENSE.txt <https://github.com/veedata/album-manager/blob/main/LICENSE.txt>`_.
