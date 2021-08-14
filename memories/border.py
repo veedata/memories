@@ -23,8 +23,7 @@ def makeBorder(imageInputPath: str, borderType: str = "normal", bgrVal: list = [
         image = cv2.copyMakeBorder(image, borderDimensions[0], borderDimensions[1], borderDimensions[2], borderDimensions[3], cv2.BORDER_CONSTANT, value=bgrVal)
 
     elif borderType == "curved":
-
-        # image = cv2.cvtColor(image, cv2.COLOR_BGR2BGRA)
+        image = cv2.cvtColor(image, cv2.COLOR_BGR2BGRA)
         image = cv2.copyMakeBorder(image, borderDimensions[0], borderDimensions[1], borderDimensions[2], borderDimensions[3], cv2.BORDER_CONSTANT, value=(255, 255, 255, 0))
 
         top_left = (0, 0)
@@ -32,11 +31,11 @@ def makeBorder(imageInputPath: str, borderType: str = "normal", bgrVal: list = [
 
         top_left = top_left
         top_right = (bottom_right[1], top_left[1])
-        bottom_right = (bottom_right[1], bottom_right[0])
         bottom_left = (top_left[0], bottom_right[0])
+        bottom_right = (bottom_right[1], bottom_right[0])
 
-        corner_radius = 100
-
+        corner_radius = 500
+        
         # straight lines
         cv2.line(image, (top_left[0] + corner_radius, top_left[1]), (top_right[0] - corner_radius, top_right[1]), bgrVal, abs(borderDimensions[0]), cv2.LINE_AA)
         cv2.line(image, (top_right[0], top_right[1] + corner_radius), (bottom_right[0], bottom_right[1] - corner_radius), bgrVal, abs(borderDimensions[0]), cv2.LINE_AA)
