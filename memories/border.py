@@ -56,7 +56,9 @@ def makeBorder(imageInputPath: str, borderType: str = "normal", bgrVal: list = [
 
     filepath, fileName = os.path.split(imageInputPath)
     fileName = fileName.split(".")
-    newFileName = fileName[0] + " - border." + fileName[1]
+    if borderType == "curved":
+        fileName[-1] = 'png'
+    newFileName = fileName[0] + " - border." + fileName[-1]
 
     imagePath = os.path.join(filepath, newFileName)
     cv2.imwrite(imagePath, image)
