@@ -5,9 +5,9 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name = 'memories',
-    version = '0.7',
+    version = '0.8',
     url = 'https://github.com/veedata/memories',
-    download_url = 'https://github.com/veedata/memories/archive/refs/tags/v0.7-beta.tar.gz',
+    download_url = 'https://github.com/veedata/memories/archive/refs/tags/v0.8-beta.tar.gz',
     author = 'Viraj Thakkar',
     author_email = 'vdthakkar111@gmail.com',
     description = 'A library for those who want to convert their older images into digitised format (with metadata), and beautify them using borders and other options.',

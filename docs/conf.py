@@ -24,9 +24,9 @@ copyright = '2021, Viraj Thakkar'
 author = 'Viraj Thakkar'
 
 # The short X.Y version
-version = '0.7'
+version = '0.8'
 # The full version, including alpha/beta/rc tags
-release = '0.7-beta'
+release = '0.8-beta'
 
 
 # -- General configuration ---------------------------------------------------
