@@ -1,7 +1,7 @@
 import cv2
 import os
 
-def makeBorder(imageInputPath: str, borderType: str = "normal", bgrVal: list = [255, 255, 255], borderDimensions: list = None) -> None:
+def makeBorder(imageInputPath: str, borderType: str = "normal", bgrVal: list = [255, 255, 255, 255], borderDimensions: list = None, radiusDimensions: list = None) -> None:
     """Add a border to the image. CUrrently in development and can only make a solid color border at 1% width/height (whichever is greater)
 
     :param imageInputPath: The path of the input image is to be passed
@@ -16,7 +16,7 @@ def makeBorder(imageInputPath: str, borderType: str = "normal", bgrVal: list = [
 
     image = cv2.imread(imageInputPath)
     
-    if borderDimensions == None:
+    if borderDimensions is None:
         borderDimensions = [max(image.shape[0], image.shape[1]) // 100]*4
     
     if borderType == "normal":        
@@ -31,10 +31,9 @@ def makeBorder(imageInputPath: str, borderType: str = "normal", bgrVal: list = [
         else:
             bgrVal[3] = 255
 
-        top_left = (0, 0)
         bottom_right = (image.shape[0], image.shape[1])
 
-        top_left = top_left
+        top_left = (0, 0)
         top_right = (bottom_right[1], top_left[1])
         bottom_left = (top_left[0], bottom_right[0])
         bottom_right = (bottom_right[1], bottom_right[0])
