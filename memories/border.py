@@ -33,12 +33,10 @@ def makeBorder(imageInputPath: str, borderType: str = "normal", bgrVal: list = [
         else:
             bgrVal[3] = 255
 
-        bottom_right = (image.shape[0], image.shape[1])
-
         top_left = (0, 0)
-        top_right = (bottom_right[1], top_left[1])
-        bottom_left = (top_left[0], bottom_right[0])
-        bottom_right = (bottom_right[1], bottom_right[0])
+        top_right = (image.shape[1], 0)
+        bottom_right = (image.shape[1], image.shape[0])
+        bottom_left = (0, image.shape[0])
 
         # straight lines
         cv2.line(image, (top_left[0] + radiusDimensions[0] + borderDimensions[0]//2, top_left[1] + borderDimensions[0]//2), (top_right[0] - radiusDimensions[1] - borderDimensions[0]//2, top_right[1] + borderDimensions[0]//2), bgrVal, abs(borderDimensions[0]), cv2.LINE_AA)
