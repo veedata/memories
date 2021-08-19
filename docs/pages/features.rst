@@ -54,8 +54,9 @@ Borders
     :align: center
     :alt: Bordered Image
 
-
 Make a border around an image. While support is limited over here, it is slated to increase over time, adding new options and developments to the same.
+
+Currently, you can add a normal border to the image and also a curved border. In both options, users can fine tune the width (normal) and radius (curved edges) of the borders. 
 
 .. automodule:: memories.border
     :members:
