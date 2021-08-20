@@ -28,10 +28,10 @@ def makeBorder(imageInputPath: str, borderType: str = "normal", bgrVal: list = [
         image = cv2.cvtColor(image, cv2.COLOR_BGR2BGRA)
         image = cv2.copyMakeBorder(image, borderDimensions[0], borderDimensions[1], borderDimensions[2], borderDimensions[3], cv2.BORDER_CONSTANT, value=(255, 255, 255, 0))
 
-        if len(bgrVal) <= 3:
-            bgrVal.append(255)
-        else:
-            bgrVal[3] = 255
+        # Need to add error checking conditions!
+        bgrVal_opaque = bgrVal
+        if len(bgrVal) == 3:
+            bgrVal_opaque.append(255)
 
         top_left = (0, 0)
         top_right = (image.shape[1], 0)
@@ -39,16 +39,16 @@ def makeBorder(imageInputPath: str, borderType: str = "normal", bgrVal: list = [
         bottom_left = (0, image.shape[0])
 
         # straight lines
-        cv2.line(image, (top_left[0] + radiusDimensions[0] + borderDimensions[0]//2, top_left[1] + borderDimensions[0]//2), (top_right[0] - radiusDimensions[1] - borderDimensions[0]//2, top_right[1] + borderDimensions[0]//2), bgrVal, abs(borderDimensions[0]), cv2.LINE_AA)
-        cv2.line(image, (top_right[0] - borderDimensions[0]//2, top_right[1] + radiusDimensions[1] + borderDimensions[0]//2), (bottom_right[0] - borderDimensions[0]//2, bottom_right[1] - radiusDimensions[2] - borderDimensions[0]//2), bgrVal, abs(borderDimensions[0]), cv2.LINE_AA)
-        cv2.line(image, (bottom_right[0] - radiusDimensions[2] - borderDimensions[0]//2, bottom_left[1] - borderDimensions[0]//2), (bottom_left[0] + radiusDimensions[3] + borderDimensions[0]//2, bottom_right[1] - borderDimensions[0]//2), bgrVal, abs(borderDimensions[0]), cv2.LINE_AA)
-        cv2.line(image, (bottom_left[0] + borderDimensions[0]//2, bottom_left[1] - radiusDimensions[3] - borderDimensions[0]//2), (top_left[0] + borderDimensions[0]//2, top_left[1] + radiusDimensions[0] + borderDimensions[0]//2), bgrVal, abs(borderDimensions[0]), cv2.LINE_AA)
+        cv2.line(image, (top_left[0] + radiusDimensions[0] + borderDimensions[0]//2, top_left[1] + borderDimensions[0]//2), (top_right[0] - radiusDimensions[1] - borderDimensions[0]//2, top_right[1] + borderDimensions[0]//2), bgrVal_opaque, abs(borderDimensions[0]), cv2.LINE_AA)
+        cv2.line(image, (top_right[0] - borderDimensions[0]//2, top_right[1] + radiusDimensions[1] + borderDimensions[0]//2), (bottom_right[0] - borderDimensions[0]//2, bottom_right[1] - radiusDimensions[2] - borderDimensions[0]//2), bgrVal_opaque, abs(borderDimensions[0]), cv2.LINE_AA)
+        cv2.line(image, (bottom_right[0] - radiusDimensions[2] - borderDimensions[0]//2, bottom_left[1] - borderDimensions[0]//2), (bottom_left[0] + radiusDimensions[3] + borderDimensions[0]//2, bottom_right[1] - borderDimensions[0]//2), bgrVal_opaque, abs(borderDimensions[0]), cv2.LINE_AA)
+        cv2.line(image, (bottom_left[0] + borderDimensions[0]//2, bottom_left[1] - radiusDimensions[3] - borderDimensions[0]//2), (top_left[0] + borderDimensions[0]//2, top_left[1] + radiusDimensions[0] + borderDimensions[0]//2), bgrVal_opaque, abs(borderDimensions[0]), cv2.LINE_AA)
 
         # arcs
-        cv2.ellipse(image, (top_left[0] + radiusDimensions[0] + borderDimensions[0]//2, top_left[1] + radiusDimensions[0] + borderDimensions[0]//2), (radiusDimensions[0], radiusDimensions[0]), 180, 0, 90, bgrVal, borderDimensions[0], cv2.LINE_AA)
-        cv2.ellipse(image, (top_right[0] - radiusDimensions[1] - borderDimensions[0]//2, top_right[1] + radiusDimensions[1] + borderDimensions[0]//2), (radiusDimensions[1], radiusDimensions[1]), 270, 0, 90, bgrVal, borderDimensions[0], cv2.LINE_AA)
-        cv2.ellipse(image, (bottom_right[0] - radiusDimensions[2] - borderDimensions[0]//2, bottom_right[1] - radiusDimensions[2] - borderDimensions[0]//2), (radiusDimensions[2], radiusDimensions[2]), 0, 0, 90, bgrVal, borderDimensions[0], cv2.LINE_AA)
-        cv2.ellipse(image, (bottom_left[0] + radiusDimensions[3] + borderDimensions[0]//2, bottom_left[1] - radiusDimensions[3] - borderDimensions[0]//2), (radiusDimensions[3], radiusDimensions[3]), 90, 0, 90, bgrVal, borderDimensions[0], cv2.LINE_AA)
+        cv2.ellipse(image, (top_left[0] + radiusDimensions[0] + borderDimensions[0]//2, top_left[1] + radiusDimensions[0] + borderDimensions[0]//2), (radiusDimensions[0], radiusDimensions[0]), 180, 0, 90, bgrVal_opaque, borderDimensions[0], cv2.LINE_AA)
+        cv2.ellipse(image, (top_right[0] - radiusDimensions[1] - borderDimensions[0]//2, top_right[1] + radiusDimensions[1] + borderDimensions[0]//2), (radiusDimensions[1], radiusDimensions[1]), 270, 0, 90, bgrVal_opaque, borderDimensions[0], cv2.LINE_AA)
+        cv2.ellipse(image, (bottom_right[0] - radiusDimensions[2] - borderDimensions[0]//2, bottom_right[1] - radiusDimensions[2] - borderDimensions[0]//2), (radiusDimensions[2], radiusDimensions[2]), 0, 0, 90, bgrVal_opaque, borderDimensions[0], cv2.LINE_AA)
+        cv2.ellipse(image, (bottom_left[0] + radiusDimensions[3] + borderDimensions[0]//2, bottom_left[1] - radiusDimensions[3] - borderDimensions[0]//2), (radiusDimensions[3], radiusDimensions[3]), 90, 0, 90, bgrVal_opaque, borderDimensions[0], cv2.LINE_AA)
 
 
     filepath, fileName = os.path.split(imageInputPath)
