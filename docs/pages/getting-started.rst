@@ -35,6 +35,8 @@ Example
 
 An example code for each appplication::
 
+.. code-block:: python
+
     import memories
 
     memories.dividedCrop("./image.png", "./", imageQuantity = 6, bgrVal = [255, 255, 255])
