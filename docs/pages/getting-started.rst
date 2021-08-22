@@ -35,6 +35,8 @@ Example
 
 An example code for each appplication::
 
+.. code-block:: python
+
     import memories
 
     memories.dividedCrop("./image.png", "./", imageQuantity = 6, bgrVal = [255, 255, 255])
@@ -43,5 +45,6 @@ An example code for each appplication::
     memories.saveAsPDF(["./source_folder/image1.png", "./random/another_source_folder/image2.jpg"], "./save_folder/file.pdf")
     memories.saveAs("./source_folder/image1.jpg", ".png")
     memories.makePage(["./source_folder/image1.png", "./random/another_source_folder/image2.jpg"], ["CSS", "Larry"], ["SASS", "That one got to you, didnt it"], "./save_folder")
-    memories.makeBorder("./image.png", "Solid", bgrVal = [255, 255, 255])
+    memories.makeBorder("./image.png", "normal", bgrVal = [255, 255, 255], borderDimensions = [100, 100, 100, 100])
+    memories.makeBorder("./image.png", "curved", bgrVal = [255, 255, 255], borderDimensions = [100, 100, 100, 100, 166])
 

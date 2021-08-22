@@ -23,6 +23,7 @@ Let's get you started with the very basics of what all can be done with Memories
    pages/about
    pages/getting-started
    pages/features
+   pages/usage
 
 
 Modules
