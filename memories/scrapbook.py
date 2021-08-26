@@ -2,12 +2,13 @@ import os
 import logging
 import sys
 
+
 def makePage(imageList: list, nameList: list, tagList: list, outputPath: str):
     """Save a list of images in PDF format
 
     :param imageList: List of path to all images to be put in the HTML
     :type imageList: list
-    :param nameList: List of names to be put in the HTML    
+    :param nameList: List of names to be put in the HTML
     :type nameList: list
     :param tagList: List of short line put in the HTML
     :type tagList: list
@@ -39,7 +40,6 @@ def makePage(imageList: list, nameList: list, tagList: list, outputPath: str):
             </div>'''
         dynamicText = dynamicText + thisText
 
-    
     staticText = f"""
             <!doctype html>
             <html lang="en">

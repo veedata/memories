@@ -3,6 +3,7 @@ import piexif
 from datetime import datetime
 import logging
 
+
 def addDate(imageInputPath: str, newDateTime: str) -> None:
     """Add date when the image was originally taken
 
@@ -14,22 +15,23 @@ def addDate(imageInputPath: str, newDateTime: str) -> None:
 
     try:
         exif_dict = piexif.load(imageInputPath)
-        
+
         newExifDate = datetime.strptime(newDateTime, '%d/%m/%Y %H:%M:%S')
         newExifDate = newExifDate.strftime('%Y:%m:%d %H:%M:%S')
-        
+
         exifDateToday = datetime.today()
         exifDateToday = exifDateToday.strftime('%Y:%m:%d %H:%M:%S')
 
         exif_dict['Exif'][piexif.ExifIFD.DateTimeOriginal] = newExifDate
         exif_dict['Exif'][piexif.ExifIFD.DateTimeDigitized] = exifDateToday
-        
+
         exif_bytes = piexif.dump(exif_dict)
         piexif.insert(exif_bytes, imageInputPath)
     except Exception as ex:
         logging.error("Exception " + str(ex) + " occurred", exc_info=True)
     except SystemExit:
         pass
+
 
 def bulkAddDate(folderPath: str, newDateTime: str) -> None:
     """Add date to all images in a folder
@@ -45,6 +47,7 @@ def bulkAddDate(folderPath: str, newDateTime: str) -> None:
             imagePath = os.path.join(dirpath, eachFile)
             addDate(imagePath, newDateTime)
 
+
 def addDatePNG(imageInputPath: str, newDateTime: str) -> None:
     """Add date when the image was originally taken for png images
 
@@ -57,7 +60,7 @@ def addDatePNG(imageInputPath: str, newDateTime: str) -> None:
     # This is in testing for now
     newExifDate = datetime.strptime(newDateTime, '%d/%m/%Y %H:%M:%S')
     newExifDate = newExifDate.isoformat()
-    
+
     with open(imageInputPath, 'rb') as f:
         content = f.read()
 
@@ -66,5 +69,5 @@ def addDatePNG(imageInputPath: str, newDateTime: str) -> None:
     brokenPNG = content.split(b"IEND")
     newPNG = brokenPNG[0] + byteStr + brokenPNG[1]
 
-    with open(imageInputPath+"-1.png", 'wb') as p:
+    with open(imageInputPath + "-1.png", 'wb') as p:
         p.write(newPNG)
