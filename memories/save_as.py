@@ -48,3 +48,7 @@ def saveAs(inputImagepath: str, outputImageformat: str) -> None:
     outputImagePath = os.path.join(imagePath,
                                    imageName + "." + outputImageformat)
     image.save(outputImagePath)
+
+
+def saveImage(image, outputImagePath):
+    image.save(outputImagePath)
