@@ -8,6 +8,7 @@ def openImage(inputImagepath):
     :param inputImagepath: Path to image to be saved
     :type inputImagepath: str
     """
+
     image = Image.open(inputImagepath).convert("RGB")
     imagePath, imageName = os.path.split(inputImagepath)
     imageName = imageName.split(".")[0]
@@ -34,21 +35,23 @@ def saveAsPDF(imageList: list, outputFilePath: str) -> None:
                         append_images=openImgList[1:])
 
 
-def saveAs(inputImagepath: str, outputImageformat: str) -> None:
-    """Save an image as a png file
+def saveAs(inputImage: str, outputImageformat: str) -> None:
+    """Save an image or list of image in any format you want
 
-    :param inputImagepath: Path to image to be saved
-    :type inputImagepath: str
+    :param inputImage: Path to image to be saved
+    :type inputImage: str or list
     :param outputImageformat: The extention in which the image is to be saved (jpg, png, tif...)
     :type outputImageformat: str
     """
 
-    image, imagePath, imageName = openImage(inputImagepath)
+    image, imagePath, imageName = openImage(inputImage)
 
-    outputImagePath = os.path.join(imagePath,
-                                   imageName + "." + outputImageformat)
-    image.save(outputImagePath)
-
-
-def saveImage(image, outputImagePath):
-    image.save(outputImagePath)
+    if type(image) is list:
+        for count, eachImage in enumerate(image):
+            outputImagePath = os.path.join(
+                imagePath, imageName + "-" + count + "." + outputImageformat)
+            eachImage.save(outputImagePath)
+    else:
+        outputImagePath = os.path.join(imagePath,
+                                       imageName + "." + outputImageformat)
+        image.save(outputImagePath)
