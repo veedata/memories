@@ -12,6 +12,7 @@ def openImage(inputImagepath):
     image = Image.open(inputImagepath).convert("RGB")
     imagePath, imageName = os.path.split(inputImagepath)
     imageName = imageName.split(".")[0]
+    
     return image, imagePath, imageName
 
 

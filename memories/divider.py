@@ -66,7 +66,8 @@ def dividedCrop(imageInputPath: str,
 
     contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE,
                                            cv2.CHAIN_APPROX_SIMPLE)
-    i = 1
+
+    dividedImages = []
     for cnt in contours:
 
         rect = cv2.minAreaRect(cnt)
@@ -96,13 +97,6 @@ def dividedCrop(imageInputPath: str,
             bottomRightX, bottomRightY = int(max(allXCord)), int(max(allYCord))
 
             img_crop = result_img[topLeftY:bottomRightY, topLeftX:bottomRightX]
+            dividedImages.append(img_crop)
 
-            os.makedirs(imageFolderOutputPath, exist_ok=True)
-
-            fileName = os.path.split(imageInputPath)[1]
-            newFileName = fileName.split(".")[0] + " - " + str(i) + ".jpg"
-            newImagePath = os.path.join(imageFolderOutputPath, newFileName)
-
-            cv2.imwrite(newImagePath, img_crop)
-
-            i = i + 1
+    return dividedImages
