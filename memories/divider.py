@@ -4,8 +4,7 @@ import numpy as np
 import copy
 
 
-def dividedCrop(imageInputPath: str,
-                imageFolderOutputPath: str,
+def dividedCrop(inputImage: str,
                 imageQuantity: int = 4,
                 bgrVal: list = [255, 255, 255]) -> None:
     """Divide a single image into multiple smaller ones. Uses background color
@@ -20,9 +19,7 @@ def dividedCrop(imageInputPath: str,
     :type bgrVal: list, optional
     """
 
-    imagePath = imageInputPath
-    imageQuantity = imageQuantity + 5
-    image = cv2.imread(imagePath)
+    image = inputImage
 
     h, w, channels = image.shape
     imageArea = h * w

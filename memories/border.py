@@ -1,8 +1,9 @@
 import cv2
 import os
+import copy
 
 
-def makeBorder(imageInputPath: str,
+def makeBorder(inputImage: str,
                borderType: str = "normal",
                bgrVal: list = [255, 255, 255, 255],
                borderDimensions: list = None,
@@ -47,7 +48,7 @@ def makeBorder(imageInputPath: str,
                                    value=(255, 255, 255, 0))
 
         # Need to add error checking conditions!
-        bgrVal_opaque = bgrVal
+        bgrVal_opaque = copy.deepcopy(bgrVal)
         if len(bgrVal) == 3:
             bgrVal_opaque.append(255)
 
