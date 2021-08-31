@@ -4,15 +4,13 @@ import numpy as np
 import copy
 
 
-def dividedCrop(inputImage: str,
+def dividedCrop(inputImage: np.ndarray,
                 imageQuantity: int = 4,
                 bgrVal: list = [255, 255, 255]) -> None:
     """Divide a single image into multiple smaller ones. Uses background color
 
-    :param imageInputPath: The path of the input image is to be passed
-    :type imageInputPath: str
-    :param imageFolderOutputPath: The path of the folder where the output image(s) are to be saved
-    :type imageFolderOutputPath: str
+    :param inputImage: The path of the input image is to be passed
+    :type inputImage: str
     :param imageQuantity: Number of images that are present in the pic
     :type imageQuantity: int, optional
     :param bgrVal: The BGR value of the background in a list

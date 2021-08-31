@@ -1,9 +1,9 @@
 import cv2
-import os
 import copy
+import numpy as np
 
 
-def makeBorder(inputImage: str,
+def makeBorder(inputImage: np.ndarray,
                borderType: str = "normal",
                bgrVal: list = [255, 255, 255, 255],
                borderDimensions: list = None,
@@ -11,8 +11,8 @@ def makeBorder(inputImage: str,
     """Add a border to the image.
     Currently in development and can only make a solid color borders.
 
-    :param imageInputPath: The path of the input image is to be passed
-    :type imageInputPath: str
+    :param inputImage: The path of the input image is to be passed
+    :type inputImage: np.ndarray
     :param borderType: Select the border type you want - normal, curved (default is normal)
     :type borderType: str
     :param bgrVal: The BGR value of the background in a list
@@ -23,7 +23,7 @@ def makeBorder(inputImage: str,
     :type radiusDimensions: list, optional
     """
 
-    image = cv2.imread(imageInputPath)
+    image = inputImage
 
     if borderDimensions is None:
         borderDimensions = [max(image.shape[0], image.shape[1]) // 100] * 4
@@ -65,12 +65,13 @@ def makeBorder(inputImage: str,
             (top_right[0] - radiusDimensions[1] - borderDimensions[0] // 2,
              top_right[1] + borderDimensions[0] // 2), bgrVal_opaque,
             abs(borderDimensions[0]), cv2.LINE_AA)
-        cv2.line(image,
-                 (top_right[0] - borderDimensions[0] // 2,
-                  top_right[1] + radiusDimensions[1] + borderDimensions[0] // 2),
-                 (bottom_right[0] - borderDimensions[0] // 2,
-                  bottom_right[1] - radiusDimensions[2] - borderDimensions[0] // 2),
-                 bgrVal_opaque, abs(borderDimensions[0]), cv2.LINE_AA)
+        cv2.line(
+            image,
+            (top_right[0] - borderDimensions[0] // 2,
+             top_right[1] + radiusDimensions[1] + borderDimensions[0] // 2),
+            (bottom_right[0] - borderDimensions[0] // 2,
+             bottom_right[1] - radiusDimensions[2] - borderDimensions[0] // 2),
+            bgrVal_opaque, abs(borderDimensions[0]), cv2.LINE_AA)
         cv2.line(
             image,
             (bottom_right[0] - radiusDimensions[2] - borderDimensions[0] // 2,
@@ -78,12 +79,13 @@ def makeBorder(inputImage: str,
             (bottom_left[0] + radiusDimensions[3] + borderDimensions[0] // 2,
              bottom_right[1] - borderDimensions[0] // 2), bgrVal_opaque,
             abs(borderDimensions[0]), cv2.LINE_AA)
-        cv2.line(image,
-                 (bottom_left[0] + borderDimensions[0] // 2,
-                  bottom_left[1] - radiusDimensions[3] - borderDimensions[0] // 2),
-                 (top_left[0] + borderDimensions[0] // 2,
-                  top_left[1] + radiusDimensions[0] + borderDimensions[0] // 2),
-                 bgrVal_opaque, abs(borderDimensions[0]), cv2.LINE_AA)
+        cv2.line(
+            image,
+            (bottom_left[0] + borderDimensions[0] // 2,
+             bottom_left[1] - radiusDimensions[3] - borderDimensions[0] // 2),
+            (top_left[0] + borderDimensions[0] // 2,
+             top_left[1] + radiusDimensions[0] + borderDimensions[0] // 2),
+            bgrVal_opaque, abs(borderDimensions[0]), cv2.LINE_AA)
 
         # arcs
         cv2.ellipse(
