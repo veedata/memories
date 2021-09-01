@@ -3,44 +3,44 @@ import logging
 import sys
 
 
-def make_page(imageList: list, nameList: list, tagList: list, outputPath: str):
+def make_page(image_list: list, name_list: list, tag_list: list, output_path: str):
     """Save a list of images in PDF format
 
-    :param imageList: List of path to all images to be put in the HTML
-    :type imageList: list
-    :param nameList: List of names to be put in the HTML
-    :type nameList: list
-    :param tagList: List of short line put in the HTML
-    :type tagList: list
-    :param outputPath: save path to the folder
-    :type outputPath: str
+    :param image_list: List of path to all images to be put in the HTML
+    :type image_list: list
+    :param name_list: List of names to be put in the HTML
+    :type name_list: list
+    :param tag_list: List of short line put in the HTML
+    :type tag_list: list
+    :param output_path: save path to the folder
+    :type output_path: str
     """
 
-    if not(len(imageList) == len(nameList) == len(tagList)):
+    if not(len(image_list) == len(name_list) == len(tag_list)):
         logging.error("The lengths of the inputs differ")
         sys.exit(1)
 
-    outputFilePath = os.path.join(outputPath, 'scrapbook.html')
-    f = open(outputFilePath, 'w')
+    output_file_path = os.path.join(output_path, 'scrapbook.html')
+    f = open(output_file_path, 'w')
 
-    dynamicText = ""
+    dynamic_text = ""
 
-    for i in range(len(imageList)):
-        thisText = f'''
+    for i in range(len(image_list)):
+        template_segment_text = f'''
             <div class="col">
                 <div class="card h-100 border-primary">
                     <div style="padding: 1em;">
-                        <img src="{imageList[i]}" class="rounded-3 card-img-top" alt="...">
+                        <img src="{image_list[i]}" class="rounded-3 card-img-top" alt="...">
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">{nameList[i]}</h5>
-                        <p class="card-text">{tagList[i]}</p>
+                        <h5 class="card-title">{name_list[i]}</h5>
+                        <p class="card-text">{tag_list[i]}</p>
                     </div>
                 </div>
             </div>'''
-        dynamicText = dynamicText + thisText
+        dynamic_text = dynamic_text + template_segment_text
 
-    staticText = f"""
+    static_text = f"""
             <!doctype html>
             <html lang="en">
 
@@ -65,7 +65,7 @@ def make_page(imageList: list, nameList: list, tagList: list, outputPath: str):
                 <div class="container">
 
                     <div class="row row-cols-1 row-cols-md-3 g-4">
-                        {dynamicText}
+                        {dynamic_text}
                     </div>
                 </div>
 
@@ -77,5 +77,5 @@ def make_page(imageList: list, nameList: list, tagList: list, outputPath: str):
             </html>
         """
 
-    f.write(staticText)
+    f.write(static_text)
     f.close()
