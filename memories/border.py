@@ -3,7 +3,7 @@ import copy
 import numpy as np
 
 
-def makeBorder(inputImage: np.ndarray,
+def make_border(inputImage: np.ndarray,
                borderType: str = "normal",
                bgrVal: list = [255, 255, 255, 255],
                borderDimensions: list = None,

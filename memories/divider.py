@@ -4,7 +4,7 @@ import numpy as np
 import copy
 
 
-def dividedCrop(inputImage: np.ndarray,
+def divided_crop(inputImage: np.ndarray,
                 imageQuantity: int = 4,
                 bgrVal: list = [255, 255, 255]) -> None:
     """Divide a single image into multiple smaller ones. Uses background color

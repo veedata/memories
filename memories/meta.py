@@ -4,7 +4,7 @@ from datetime import datetime
 import logging
 
 
-def addDate(imageInputPath: str, newDateTime: str) -> None:
+def add_date(imageInputPath: str, newDateTime: str) -> None:
     """Add date when the image was originally taken
 
     :param imageInputPath: The path of the input image is to be passed
@@ -33,7 +33,7 @@ def addDate(imageInputPath: str, newDateTime: str) -> None:
         pass
 
 
-def bulkAddDate(folderPath: str, newDateTime: str) -> None:
+def bulk_add_date(folderPath: str, newDateTime: str) -> None:
     """Add date to all images in a folder
 
     :param folderPath: The path of folder
@@ -48,8 +48,9 @@ def bulkAddDate(folderPath: str, newDateTime: str) -> None:
             addDate(imagePath, newDateTime)
 
 
-def addDatePNG(imageInputPath: str, newDateTime: str) -> None:
+def add_date_png(imageInputPath: str, newDateTime: str) -> None:
     """Add date when the image was originally taken for png images
+    Under Testing and does not work currently!
 
     :param imageInputPath: The path of the input image is to be passed
     :type imageInputPath: str

@@ -3,7 +3,7 @@ import logging
 import sys
 
 
-def makePage(imageList: list, nameList: list, tagList: list, outputPath: str):
+def make_page(imageList: list, nameList: list, tagList: list, outputPath: str):
     """Save a list of images in PDF format
 
     :param imageList: List of path to all images to be put in the HTML
