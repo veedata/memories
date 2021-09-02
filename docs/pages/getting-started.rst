@@ -39,12 +39,25 @@ An example code for each appplication::
 
     import memories
 
-    memories.dividedCrop("./image.png", "./", imageQuantity = 6, bgrVal = [255, 255, 255])
-    memories.addDate("./image-1.jpg", "27/04/2021 12:00:03")
-    memories.bulkAddDate("./", "27/04/2021 12:00:03")
-    memories.saveAsPDF(["./source_folder/image1.png", "./random/another_source_folder/image2.jpg"], "./save_folder/file.pdf")
-    memories.saveAs("./source_folder/image1.jpg", ".png")
-    memories.makePage(["./source_folder/image1.png", "./random/another_source_folder/image2.jpg"], ["CSS", "Larry"], ["SASS", "That one got to you, didnt it"], "./save_folder")
-    memories.makeBorder("./image.png", "normal", bgrVal = [255, 255, 255], borderDimensions = [100, 100, 100, 100])
-    memories.makeBorder("./image.png", "curved", bgrVal = [255, 255, 255], borderDimensions = [100, 100, 100, 100, 166])
+    # Add meta data to images
+    memories.add_date("./image-1.jpg", "27/04/2021 12:00:03")
+    memories.bulk_add_date("./", "27/04/2021 12:00:03")
+ 
+    memories.make_page(["./source_folder/image1.png", "./random/another_source_folder/image2.jpg"], ["CSS", "Larry"], ["SASS", "That one got to you, didnt it"], "./save_folder")
 
+    image = memories.open_image("./image.png")
+    image1 = mem.open_image("./image.png")
+    image2 = mem.open_image("./image.png")
+    image3 = mem.open_image("./image.png")
+
+    memories.divided_crop(image, image_quantity = 6, bgr_value = [255, 255, 255])
+    # Normal squared borders
+    memories.make_border(image, "normal", bgr_value = [255, 255, 255], border_dimensions = [100, 100, 100, 100])
+    # Curved borders
+    memories.make_border(image, "curved", bgr_value = [255, 255, 255], border_dimensions = [100, 100, 100, 100], radius_dimensions = [100, 100, 100, 100])
+
+    memories.save_image(image, "path/to/save_folder/file.extention")
+    # Save multiple images at once
+    memories.save_image([image1, image2, image3], "path/to/save_folder/file.extention")
+    # Save multiple images as a pdf
+    memories.save_pdf(["img-1.png", "img-1.jpg", "img-2.jpg"], "path/to/save_folder/file.pdf")

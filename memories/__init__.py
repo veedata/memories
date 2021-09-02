@@ -7,7 +7,7 @@ from .meta import add_date
 from .meta import bulk_add_date
 from .meta import add_date_png
 
-from .save_as import open_image_file
+from .save_as import open_image
 from .save_as import save_pdf
 from .save_as import save_image
 

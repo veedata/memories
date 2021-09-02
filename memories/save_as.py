@@ -3,7 +3,7 @@ import os
 import numpy as np
 
 
-def open_image_file(image_path: str) -> np.ndarray:
+def open_image(image_path: str) -> np.ndarray:
     """Takes an image path as input and returns the image file to the user.
     Can be then used for further processing or to save in any format required.
 
@@ -19,6 +19,7 @@ def open_image_file(image_path: str) -> np.ndarray:
 
 def save_pdf(image_list: list, output_path: str) -> None:
     """Save a list of images in PDF format
+    -> Need to update
 
     :param image_list: List of path to all images to be saved
     :type image_list: list
