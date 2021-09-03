@@ -4,22 +4,24 @@ import numpy as np
 
 
 def make_border(input_image: np.ndarray,
-               border_type: str = "normal",
-               bgr_value: list = [255, 255, 255, 255],
-               border_dimension: list = None,
-               radius_dimension: list = None) -> None:
+                border_type: str = "normal",
+                bgr_value: list = [255, 255, 255, 255],
+                border_dimension: list = None,
+                radius_dimension: list = None) -> None:
     """Add a border to the image.
     Currently in development and can only make a solid color borders.
 
     :param input_image: The path of the input image is to be passed
     :type input_image: np.ndarray
-    :param border_type: Select the border type you want - normal, curved (default is normal)
+    :param border_type: Select border type - normal, curved (default is normal)
     :type border_type: str
     :param bgr_value: The BGR value of the background in a list
     :type bgr_value: list, optional
-    :param border_dimension: The value (in pixels) of the border to be made, order is in top, bottom, left, right. Default value is 1% of max(imageheight, imagewidth)
+    :param border_dimension: The value (in pixels) of the border to be made,
+     order is top, bottom, left, right. Default is 1% of max(height, width)
     :type border_dimension: list, optional
-    :param radius_dimension: The value (in pixels) of the curvature of radius to be made, order is in top-right, top-left, bottom-right, bottom-left.
+    :param radius_dimension: The value (in pixels) of the curvature of radius,
+     order is in top-right, top-left, bottom-right, bottom-left.
     :type radius_dimension: list, optional
     """
 
@@ -65,13 +67,12 @@ def make_border(input_image: np.ndarray,
             (top_right[0] - radius_dimension[1] - border_dimension[0] // 2,
              top_right[1] + border_dimension[0] // 2), bgr_value_opaque,
             abs(border_dimension[0]), cv2.LINE_AA)
-        cv2.line(
-            image,
-            (top_right[0] - border_dimension[0] // 2,
-             top_right[1] + radius_dimension[1] + border_dimension[0] // 2),
-            (bottom_right[0] - border_dimension[0] // 2,
-             bottom_right[1] - radius_dimension[2] - border_dimension[0] // 2),
-            bgr_value_opaque, abs(border_dimension[0]), cv2.LINE_AA)
+        cv2.line(image,
+                 (top_right[0] - border_dimension[0] // 2, top_right[1] +
+                  radius_dimension[1] + border_dimension[0] // 2),
+                 (bottom_right[0] - border_dimension[0] // 2, bottom_right[1] -
+                  radius_dimension[2] - border_dimension[0] // 2),
+                 bgr_value_opaque, abs(border_dimension[0]), cv2.LINE_AA)
         cv2.line(
             image,
             (bottom_right[0] - radius_dimension[2] - border_dimension[0] // 2,
@@ -79,13 +80,12 @@ def make_border(input_image: np.ndarray,
             (bottom_left[0] + radius_dimension[3] + border_dimension[0] // 2,
              bottom_right[1] - border_dimension[0] // 2), bgr_value_opaque,
             abs(border_dimension[0]), cv2.LINE_AA)
-        cv2.line(
-            image,
-            (bottom_left[0] + border_dimension[0] // 2,
-             bottom_left[1] - radius_dimension[3] - border_dimension[0] // 2),
-            (top_left[0] + border_dimension[0] // 2,
-             top_left[1] + radius_dimension[0] + border_dimension[0] // 2),
-            bgr_value_opaque, abs(border_dimension[0]), cv2.LINE_AA)
+        cv2.line(image,
+                 (bottom_left[0] + border_dimension[0] // 2, bottom_left[1] -
+                  radius_dimension[3] - border_dimension[0] // 2),
+                 (top_left[0] + border_dimension[0] // 2, top_left[1] +
+                  radius_dimension[0] + border_dimension[0] // 2),
+                 bgr_value_opaque, abs(border_dimension[0]), cv2.LINE_AA)
 
         # arcs
         cv2.ellipse(

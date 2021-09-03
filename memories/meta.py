@@ -65,10 +65,11 @@ def add_date_png(image_path: str, new_datetime: str) -> None:
     with open(image_path, 'rb') as f:
         content = f.read()
 
-    byte_str = bytes("eXIf...%tEXtCreateDate." + new_exif_date + "...IEND", "utf-8")
+    byte_str = bytes("eXIf...%tEXtCreateDate." + new_exif_date + "...IEND",
+                     "utf-8")
 
     broken_png = content.split(b"IEND")
-    newPNG = broken_png[0] + byte_str + broken_png[1]
+    new_png = broken_png[0] + byte_str + broken_png[1]
 
     with open(image_path + "-1.png", 'wb') as p:
-        p.write(newPNG)
+        p.write(new_png)

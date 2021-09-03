@@ -1,12 +1,11 @@
-import os
 import cv2
 import numpy as np
 import copy
 
 
 def divided_crop(input_image: np.ndarray,
-                image_quantity: int = 4,
-                bgr_value: list = [255, 255, 255]) -> None:
+                 image_quantity: int = 4,
+                 bgr_value: list = [255, 255, 255]) -> list:
     """Divide a single image into multiple smaller ones. Uses background color
 
     :param input_image: The path of the input image is to be passed
@@ -36,17 +35,18 @@ def divided_crop(input_image: np.ndarray,
         hsv_value = list(cv2.cvtColor(bgr_value, cv2.COLOR_BGR2HSV)[0][0])
         image_rot_hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 
-        lower_thresh = (max(int(hsv_value[0]) - 5,
-                               0), max(int(hsv_value[1]) - 20,
-                                       0), max(int(hsv_value[2]) - 25, 0))
-        upper_thresh = (min(int(hsv_value[0]) + 5,
-                               180), min(int(hsv_value[1]) + 20,
-                                         255), min(int(hsv_value[2]) + 25, 255))
+        lower_thresh = (max(int(hsv_value[0]) - 5, 0),
+                        max(int(hsv_value[1]) - 20, 0),
+                        max(int(hsv_value[2]) - 25, 0))
+        upper_thresh = (min(int(hsv_value[0]) + 5, 180),
+                        min(int(hsv_value[1]) + 20, 255),
+                        min(int(hsv_value[2]) + 25, 255))
 
         thresh = cv2.inRange(image_rot_hsv, lower_thresh, upper_thresh)
 
     else:
-        # Soon to be retired part.. will be merged with above when smaller optimisations are made to the above code
+        # Soon to be retired part.. will be merged with above
+        # when smaller optimisations are made to the above code
         image = cv2.copyMakeBorder(image,
                                    border_dim,
                                    border_dim,
@@ -62,7 +62,7 @@ def divided_crop(input_image: np.ndarray,
     contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE,
                                            cv2.CHAIN_APPROX_SIMPLE)
 
-    dividedImages = []
+    divided_images = []
     for cnt in contours:
 
         rect = cv2.minAreaRect(cnt)
@@ -88,10 +88,13 @@ def divided_crop(input_image: np.ndarray,
             all_x_coords = [i[0] for i in pts]
             all_y_coords = [i[1] for i in pts]
 
-            top_left_x, top_left_y = int(min(all_x_coords)), int(min(all_y_coords))
-            bottom_right_x, bottom_right_y = int(max(all_x_coords)), int(max(all_y_coords))
+            top_left_x, top_left_y = int(min(all_x_coords)), int(
+                min(all_y_coords))
+            bottom_right_x, bottom_right_y = int(max(all_x_coords)), int(
+                max(all_y_coords))
 
-            img_crop = result_img[top_left_y:bottom_right_y, top_left_x:bottom_right_x]
-            dividedImages.append(img_crop)
+            img_crop = result_img[top_left_y:bottom_right_y,
+                                  top_left_x:bottom_right_x]
+            divided_images.append(img_crop)
 
-    return dividedImages
+    return divided_images

@@ -28,8 +28,8 @@ def save_pdf(image_list: list, output_path: str) -> None:
     """
 
     updated_image_list = []
-    for eachPath in image_list:
-        updated_image_list.append(Image.open(eachPath).convert("RGB"))
+    for each_path in image_list:
+        updated_image_list.append(Image.open(each_path).convert("RGB"))
 
     updated_image_list[0].save(output_path,
                                "PDF",
@@ -52,11 +52,11 @@ def save_image(input_image: np.ndarray, output_path: str) -> None:
         ".")[-1]
 
     if type(input_image) is list:
-        for count, eachImage in enumerate(input_image):
-            outputImagePath = os.path.join(
+        for count, each_image in enumerate(input_image):
+            output_image_path = os.path.join(
                 file_path, file_name + "-" + str(count) + "." + file_extension)
-            eachImage = Image.fromarray(eachImage)
-            eachImage.save(outputImagePath)
+            each_image = Image.fromarray(each_image)
+            each_image.save(output_image_path)
     else:
         input_image = Image.fromarray(input_image)
         input_image.save(output_path)

@@ -3,7 +3,8 @@ import logging
 import sys
 
 
-def make_page(image_list: list, name_list: list, tag_list: list, output_path: str):
+def make_page(image_list: list, name_list: list, tag_list: list,
+              output_path: str):
     """Save a list of images in PDF format
 
     :param image_list: List of path to all images to be put in the HTML
@@ -16,7 +17,7 @@ def make_page(image_list: list, name_list: list, tag_list: list, output_path: st
     :type output_path: str
     """
 
-    if not(len(image_list) == len(name_list) == len(tag_list)):
+    if not (len(image_list) == len(name_list) == len(tag_list)):
         logging.error("The lengths of the inputs differ")
         sys.exit(1)
 
@@ -30,7 +31,8 @@ def make_page(image_list: list, name_list: list, tag_list: list, output_path: st
             <div class="col">
                 <div class="card h-100 border-primary">
                     <div style="padding: 1em;">
-                        <img src="{image_list[i]}" class="rounded-3 card-img-top" alt="...">
+                        <img src="{image_list[i]}"
+                            class="rounded-3 card-img-top" alt="...">
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">{name_list[i]}</h5>
@@ -46,16 +48,21 @@ def make_page(image_list: list, name_list: list, tag_list: list, output_path: st
 
             <head>
                 <meta charset="utf-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1">
+                <meta name="viewport"
+                    content="width=device-width, initial-scale=1">
 
-                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
-                    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+                <link
+                    href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+                    rel="stylesheet"
+                    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+                    crossorigin="anonymous">
 
                 <title>A Scrapbook Page</title>
             </head>
 
             <body>
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+                <script
+                    src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
                     integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
                     crossorigin="anonymous"></script>
 
