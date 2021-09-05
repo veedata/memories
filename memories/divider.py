@@ -1,84 +1,100 @@
-import os
 import cv2
 import numpy as np
 import copy
 
-def dividedCrop(imageInputPath: str, imageFolderOutputPath: str, imageQuantity: int = 4, bgrVal: list = [255, 255, 255]) -> None:
+
+def divided_crop(input_image: np.ndarray,
+                 image_quantity: int = 4,
+                 bgr_value: list = [255, 255, 255]) -> list:
     """Divide a single image into multiple smaller ones. Uses background color
 
-    :param imageInputPath: The path of the input image is to be passed
-    :type imageInputPath: str
-    :param imageFolderOutputPath: The path of the folder where the output image(s) are to be saved
-    :type imageFolderOutputPath: str
-    :param imageQuantity: Number of images that are present in the pic
-    :type imageQuantity: int, optional
-    :param bgrVal: The BGR value of the background in a list
-    :type bgrVal: list, optional
+    :param input_image: The path of the input image is to be passed
+    :type input_image: str
+    :param image_quantity: Number of images that are present in the pic
+    :type image_quantity: int, optional
+    :param bgr_value: The BGR value of the background in a list
+    :type bgr_value: list, optional
     """
 
-    imagePath = imageInputPath
-    imageQuantity = imageQuantity + 5
-    image = cv2.imread(imagePath)
+    image = input_image
 
     h, w, channels = image.shape
-    imageArea = h*w
-    borderDim = max(image.shape[0], image.shape[1]) // 100
+    image_area = h * w
+    border_dim = max(image.shape[0], image.shape[1]) // 100
 
-    if bgrVal != [255, 255, 255]:
-        image = cv2.copyMakeBorder(image, borderDim, borderDim, borderDim, borderDim, cv2.BORDER_CONSTANT, value=bgrVal)
-        bgrVal = np.uint8([[bgrVal]])
+    if bgr_value != [255, 255, 255]:
+        image = cv2.copyMakeBorder(image,
+                                   border_dim,
+                                   border_dim,
+                                   border_dim,
+                                   border_dim,
+                                   cv2.BORDER_CONSTANT,
+                                   value=bgr_value)
+        bgr_value = np.uint8([[bgr_value]])
 
-        hsvVal = list(cv2.cvtColor(bgrVal, cv2.COLOR_BGR2HSV)[0][0])
-        imageRot_hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+        hsv_value = list(cv2.cvtColor(bgr_value, cv2.COLOR_BGR2HSV)[0][0])
+        image_rot_hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 
-        lowerThreshVals = (max(int(hsvVal[0])-5, 0), max(int(hsvVal[1])-20, 0), max(int(hsvVal[2])-25, 0))
-        upperThreshVals = (min(int(hsvVal[0])+5, 180), min(int(hsvVal[1])+20, 255), min(int(hsvVal[2])+25, 255))
-        
-        thresh = cv2.inRange(imageRot_hsv, lowerThreshVals, upperThreshVals)
+        lower_thresh = (max(int(hsv_value[0]) - 5, 0),
+                        max(int(hsv_value[1]) - 20, 0),
+                        max(int(hsv_value[2]) - 25, 0))
+        upper_thresh = (min(int(hsv_value[0]) + 5, 180),
+                        min(int(hsv_value[1]) + 20, 255),
+                        min(int(hsv_value[2]) + 25, 255))
+
+        thresh = cv2.inRange(image_rot_hsv, lower_thresh, upper_thresh)
 
     else:
-        # Soon to be retired part.. will be merged with above when smaller optimisations are made to the above code
-        image = cv2.copyMakeBorder(image, borderDim, borderDim, borderDim, borderDim, cv2.BORDER_CONSTANT, value=bgrVal)
+        # Soon to be retired part.. will be merged with above
+        # when smaller optimisations are made to the above code
+        image = cv2.copyMakeBorder(image,
+                                   border_dim,
+                                   border_dim,
+                                   border_dim,
+                                   border_dim,
+                                   cv2.BORDER_CONSTANT,
+                                   value=bgr_value)
 
-        imageRot_grey = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-        ret, thresh = cv2.threshold(imageRot_grey, 205, 255, cv2.THRESH_BINARY_INV)
+        image_rot_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        ret, thresh = cv2.threshold(image_rot_gray, 205, 255,
+                                    cv2.THRESH_BINARY_INV)
 
-    contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-    i = 1
+    contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE,
+                                           cv2.CHAIN_APPROX_SIMPLE)
+
+    divided_images = []
     for cnt in contours:
 
         rect = cv2.minAreaRect(cnt)
         box = cv2.boxPoints(rect)
         box = np.int0(box)
-        rectArea = rect[1][0]*rect[1][1]
+        rect_area = rect[1][0] * rect[1][1]
 
-        if rectArea*imageQuantity > imageArea:
+        if rect_area * image_quantity > image_area:
 
             # rotate the image
-            picRectAngle = rect[2] + 90
-            if picRectAngle>=45:
-                picRectAngle = picRectAngle - 90
+            image_rect_area = rect[2] + 90
+            if image_rect_area >= 45:
+                image_rect_area = image_rect_area - 90
 
-            rot = cv2.getRotationMatrix2D((w/2, h/2), picRectAngle, 1)
-            result_img = cv2.warpAffine(copy.deepcopy(image), rot, (w, h), flags=cv2.INTER_LINEAR)
+            rot = cv2.getRotationMatrix2D((w / 2, h / 2), image_rect_area, 1)
+            result_img = cv2.warpAffine(copy.deepcopy(image),
+                                        rot, (w, h),
+                                        flags=cv2.INTER_LINEAR)
 
             # rotate points
             pts = np.int0(cv2.transform(np.array([box]), rot))[0]
 
-            allXCord = [i[0] for i in pts]
-            allYCord = [i[1] for i in pts]
+            all_x_coords = [i[0] for i in pts]
+            all_y_coords = [i[1] for i in pts]
 
-            topLeftX, topLeftY = int(min(allXCord)), int(min(allYCord))
-            bottomRightX, bottomRightY = int(max(allXCord)), int(max(allYCord))
-            
-            img_crop = result_img[topLeftY:bottomRightY, topLeftX:bottomRightX]
+            top_left_x, top_left_y = int(min(all_x_coords)), int(
+                min(all_y_coords))
+            bottom_right_x, bottom_right_y = int(max(all_x_coords)), int(
+                max(all_y_coords))
 
-            os.makedirs(imageFolderOutputPath, exist_ok=True)
-            
-            fileName = os.path.split(imageInputPath)[1]
-            newFileName = fileName.split(".")[0] + " - " + str(i) + ".jpg"
-            newImagePath = os.path.join(imageFolderOutputPath, newFileName)
+            img_crop = result_img[top_left_y:bottom_right_y,
+                                  top_left_x:bottom_right_x]
+            divided_images.append(img_crop)
 
-            cv2.imwrite(newImagePath, img_crop)
-
-            i = i + 1
+    return divided_images

@@ -1,3 +1,4 @@
+=====
 Usage
 =====
 
@@ -12,7 +13,9 @@ Divide a image of images into multiple seperate images
 
     import memories as mem
 
-    mem.dividedCrop("./image.png", "./", imageQuantity = 6, bgrVal = [255, 255, 255])
+    image = mem.open_image("./image.png")
+
+    mem.divided_crop(image, image_quantity = 6, bgr_value = [255, 255, 255])
 
 Add borders to images 
 ---------------------
@@ -26,10 +29,12 @@ Automatically add borders to images. Borders will be added outisde the image and
 
     import memories as mem
 
-    # Making a simple border. 
-    mem.makeBorder("./image.png", "normal", bgrVal = [255, 255, 255], borderDimensions = [100, 100, 100, 100])
-    # Making a border with curved edges.
-    mem.makeBorder("./image.png", "curved", bgrVal = [255, 255, 255], borderDimensions = [100, 100, 100, 100], radiusDimensions = [100, 100, 100, 100])
+    image = mem.open_image("./image.png")
+
+    # Squared borders
+    mem.make_border(image, "normal", bgr_value = [255, 255, 255], border_dimensions = [100, 100, 100, 100])
+    # Curved borders
+    mem.make_border(image, "curved", bgr_value = [255, 255, 255], border_dimensions = [100, 100, 100, 100], radius_dimensions = [100, 100, 100, 100])
 
 
 Generate HTML page
@@ -68,5 +73,12 @@ The save as pdf function takes a list of images as input and produces a pdf with
 
     import memories as mem
 
-    mem.saveAsPDF(["./source_folder/image1.png", "./random/another_source_folder/image2.jpg"], "./save_folder/file.pdf")
-    mem.saveAs("./source_folder/image1.jpg", ".png")
+    image1 = mem.open_image("./image.png")
+    image2 = mem.open_image("./image.png")
+    image3 = mem.open_image("./image.png")
+    
+    mem.save_image(image1, "path/to/save_folder/file.extention")
+    # Save multiple images at once
+    mem.save_image([image1, image2, image3], "path/to/save_folder/file.extention")
+    # Save multiple images as a pdf
+    mem.save_pdf(["img-1.png", "img-1.jpg", "img-2.jpg"], "path/to/save_folder/file.pdf")

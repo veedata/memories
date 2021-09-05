@@ -1,37 +1,58 @@
 import cv2
-import os
+import copy
+import numpy as np
 
-def makeBorder(imageInputPath: str, borderType: str = "normal", bgrVal: list = [255, 255, 255, 255], borderDimensions: list = None, radiusDimensions: list = None) -> None:
-    """Add a border to the image. CUrrently in development and can only make a solid color border at 1% width/height (whichever is greater)
 
-    :param imageInputPath: The path of the input image is to be passed
-    :type imageInputPath: str
-    :param borderType: Select the border type you want - normal, curved (default is normal)
-    :type borderType: str
-    :param bgrVal: The BGR value of the background in a list
-    :type bgrVal: list, optional
-    :param borderDimensions: The value (in pixels) of the border to be made, order is in top, bottom, left, right. Default value is 1% of max(imageheight, imagewidth)
-    :type borderDimensions: list, optional
-    :param radiusDimensions: The value (in pixels) of the curvature of radius to be made, order is in top-right, top-left, bottom-right, bottom-left.
-    :type radiusDimensions: list, optional
+def make_border(input_image: np.ndarray,
+                border_type: str = "normal",
+                bgr_value: list = [255, 255, 255, 255],
+                border_dimension: list = None,
+                radius_dimension: list = None) -> None:
+    """Add a border to the image.
+    Currently in development and can only make a solid color borders.
+
+    :param input_image: The path of the input image is to be passed
+    :type input_image: np.ndarray
+    :param border_type: Select border type - normal, curved (default is normal)
+    :type border_type: str
+    :param bgr_value: The BGR value of the background in a list
+    :type bgr_value: list, optional
+    :param border_dimension: The value (in pixels) of the border to be made,
+     order is top, bottom, left, right. Default is 1% of max(height, width)
+    :type border_dimension: list, optional
+    :param radius_dimension: The value (in pixels) of the curvature of radius,
+     order is in top-right, top-left, bottom-right, bottom-left.
+    :type radius_dimension: list, optional
     """
 
-    image = cv2.imread(imageInputPath)
-    
-    if borderDimensions is None:
-        borderDimensions = [max(image.shape[0], image.shape[1]) // 100]*4
-    
-    if borderType == "normal":        
-        image = cv2.copyMakeBorder(image, borderDimensions[0], borderDimensions[1], borderDimensions[2], borderDimensions[3], cv2.BORDER_CONSTANT, value=bgrVal)
+    image = input_image
 
-    elif borderType == "curved":
+    if border_dimension is None:
+        border_dimension = [max(image.shape[0], image.shape[1]) // 100] * 4
+
+    if border_type == "normal":
+        image = cv2.copyMakeBorder(image,
+                                   border_dimension[0],
+                                   border_dimension[1],
+                                   border_dimension[2],
+                                   border_dimension[3],
+                                   cv2.BORDER_CONSTANT,
+                                   value=bgr_value)
+
+    elif border_type == "curved":
         image = cv2.cvtColor(image, cv2.COLOR_BGR2BGRA)
-        image = cv2.copyMakeBorder(image, borderDimensions[0], borderDimensions[1], borderDimensions[2], borderDimensions[3], cv2.BORDER_CONSTANT, value=(255, 255, 255, 0))
+        image = cv2.copyMakeBorder(image,
+                                   border_dimension[0],
+                                   border_dimension[1],
+                                   border_dimension[2],
+                                   border_dimension[3],
+                                   cv2.BORDER_CONSTANT,
+                                   value=(255, 255, 255, 0))
 
         # Need to add error checking conditions!
-        bgrVal_opaque = bgrVal
-        if len(bgrVal) == 3:
-            bgrVal_opaque.append(255)
+        bgr_value_opaque = copy.deepcopy(bgr_value)
+        if len(bgr_value) == 3:
+            bgr_value_opaque.append(255)
 
         top_left = (0, 0)
         top_right = (image.shape[1], 0)
@@ -39,24 +60,57 @@ def makeBorder(imageInputPath: str, borderType: str = "normal", bgrVal: list = [
         bottom_left = (0, image.shape[0])
 
         # straight lines
-        cv2.line(image, (top_left[0] + radiusDimensions[0] + borderDimensions[0]//2, top_left[1] + borderDimensions[0]//2), (top_right[0] - radiusDimensions[1] - borderDimensions[0]//2, top_right[1] + borderDimensions[0]//2), bgrVal_opaque, abs(borderDimensions[0]), cv2.LINE_AA)
-        cv2.line(image, (top_right[0] - borderDimensions[0]//2, top_right[1] + radiusDimensions[1] + borderDimensions[0]//2), (bottom_right[0] - borderDimensions[0]//2, bottom_right[1] - radiusDimensions[2] - borderDimensions[0]//2), bgrVal_opaque, abs(borderDimensions[0]), cv2.LINE_AA)
-        cv2.line(image, (bottom_right[0] - radiusDimensions[2] - borderDimensions[0]//2, bottom_left[1] - borderDimensions[0]//2), (bottom_left[0] + radiusDimensions[3] + borderDimensions[0]//2, bottom_right[1] - borderDimensions[0]//2), bgrVal_opaque, abs(borderDimensions[0]), cv2.LINE_AA)
-        cv2.line(image, (bottom_left[0] + borderDimensions[0]//2, bottom_left[1] - radiusDimensions[3] - borderDimensions[0]//2), (top_left[0] + borderDimensions[0]//2, top_left[1] + radiusDimensions[0] + borderDimensions[0]//2), bgrVal_opaque, abs(borderDimensions[0]), cv2.LINE_AA)
+        cv2.line(
+            image,
+            (top_left[0] + radius_dimension[0] + border_dimension[0] // 2,
+             top_left[1] + border_dimension[0] // 2),
+            (top_right[0] - radius_dimension[1] - border_dimension[0] // 2,
+             top_right[1] + border_dimension[0] // 2), bgr_value_opaque,
+            abs(border_dimension[0]), cv2.LINE_AA)
+        cv2.line(image,
+                 (top_right[0] - border_dimension[0] // 2, top_right[1] +
+                  radius_dimension[1] + border_dimension[0] // 2),
+                 (bottom_right[0] - border_dimension[0] // 2, bottom_right[1] -
+                  radius_dimension[2] - border_dimension[0] // 2),
+                 bgr_value_opaque, abs(border_dimension[0]), cv2.LINE_AA)
+        cv2.line(
+            image,
+            (bottom_right[0] - radius_dimension[2] - border_dimension[0] // 2,
+             bottom_left[1] - border_dimension[0] // 2),
+            (bottom_left[0] + radius_dimension[3] + border_dimension[0] // 2,
+             bottom_right[1] - border_dimension[0] // 2), bgr_value_opaque,
+            abs(border_dimension[0]), cv2.LINE_AA)
+        cv2.line(image,
+                 (bottom_left[0] + border_dimension[0] // 2, bottom_left[1] -
+                  radius_dimension[3] - border_dimension[0] // 2),
+                 (top_left[0] + border_dimension[0] // 2, top_left[1] +
+                  radius_dimension[0] + border_dimension[0] // 2),
+                 bgr_value_opaque, abs(border_dimension[0]), cv2.LINE_AA)
 
         # arcs
-        cv2.ellipse(image, (top_left[0] + radiusDimensions[0] + borderDimensions[0]//2, top_left[1] + radiusDimensions[0] + borderDimensions[0]//2), (radiusDimensions[0], radiusDimensions[0]), 180, 0, 90, bgrVal_opaque, borderDimensions[0], cv2.LINE_AA)
-        cv2.ellipse(image, (top_right[0] - radiusDimensions[1] - borderDimensions[0]//2, top_right[1] + radiusDimensions[1] + borderDimensions[0]//2), (radiusDimensions[1], radiusDimensions[1]), 270, 0, 90, bgrVal_opaque, borderDimensions[0], cv2.LINE_AA)
-        cv2.ellipse(image, (bottom_right[0] - radiusDimensions[2] - borderDimensions[0]//2, bottom_right[1] - radiusDimensions[2] - borderDimensions[0]//2), (radiusDimensions[2], radiusDimensions[2]), 0, 0, 90, bgrVal_opaque, borderDimensions[0], cv2.LINE_AA)
-        cv2.ellipse(image, (bottom_left[0] + radiusDimensions[3] + borderDimensions[0]//2, bottom_left[1] - radiusDimensions[3] - borderDimensions[0]//2), (radiusDimensions[3], radiusDimensions[3]), 90, 0, 90, bgrVal_opaque, borderDimensions[0], cv2.LINE_AA)
+        cv2.ellipse(
+            image,
+            (top_left[0] + radius_dimension[0] + border_dimension[0] // 2,
+             top_left[1] + radius_dimension[0] + border_dimension[0] // 2),
+            (radius_dimension[0], radius_dimension[0]), 180, 0, 90,
+            bgr_value_opaque, border_dimension[0], cv2.LINE_AA)
+        cv2.ellipse(
+            image,
+            (top_right[0] - radius_dimension[1] - border_dimension[0] // 2,
+             top_right[1] + radius_dimension[1] + border_dimension[0] // 2),
+            (radius_dimension[1], radius_dimension[1]), 270, 0, 90,
+            bgr_value_opaque, border_dimension[0], cv2.LINE_AA)
+        cv2.ellipse(
+            image,
+            (bottom_right[0] - radius_dimension[2] - border_dimension[0] // 2,
+             bottom_right[1] - radius_dimension[2] - border_dimension[0] // 2),
+            (radius_dimension[2], radius_dimension[2]), 0, 0, 90,
+            bgr_value_opaque, border_dimension[0], cv2.LINE_AA)
+        cv2.ellipse(
+            image,
+            (bottom_left[0] + radius_dimension[3] + border_dimension[0] // 2,
+             bottom_left[1] - radius_dimension[3] - border_dimension[0] // 2),
+            (radius_dimension[3], radius_dimension[3]), 90, 0, 90,
+            bgr_value_opaque, border_dimension[0], cv2.LINE_AA)
 
-
-    filepath, fileName = os.path.split(imageInputPath)
-    fileName = fileName.split(".")
-    if borderType == "curved":
-        fileName[-1] = 'png'
-    newFileName = fileName[0] + " - border." + fileName[-1]
-
-    imagePath = os.path.join(filepath, newFileName)
-    cv2.imwrite(imagePath, image)
-
+    return image

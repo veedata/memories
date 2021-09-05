@@ -24,6 +24,7 @@ Let's get you started with the very basics of what all can be done with Memories
    pages/getting-started
    pages/features
    pages/usage
+   pages/contributing
 
 
 Modules
