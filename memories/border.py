@@ -29,6 +29,13 @@ def make_border(input_image: np.ndarray,
 
     if border_dimension is None:
         border_dimension = [max(image.shape[0], image.shape[1]) // 100] * 4
+    elif type(border_dimension) is int:
+        border_dimension = [border_dimension] * 4
+
+    if radius_dimension is None:
+        radius_dimension = [max(image.shape[0], image.shape[1]) // 100] * 4
+    elif type(radius_dimension) is int:
+        radius_dimension = [radius_dimension] * 4
 
     if border_type == "normal":
         image = cv2.copyMakeBorder(image,
