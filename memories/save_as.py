@@ -1,6 +1,7 @@
 from PIL import Image
 import os
 import numpy as np
+import requests
 
 
 def open_image(image_path: str) -> np.ndarray:
@@ -10,6 +11,11 @@ def open_image(image_path: str) -> np.ndarray:
     :param image_path: Path to image to be saved
     :type image_path: str
     """
+
+    if image_path.startswith('http'):
+        response = requests.get(image_path, stream=True)
+        response.raw.decode_content = True
+        image_path = response.raw
 
     image = Image.open(image_path).convert("RGB")
     image = np.asarray(image)
