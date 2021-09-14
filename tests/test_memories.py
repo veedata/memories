@@ -38,3 +38,12 @@ class test_operations(unittest.TestCase):
                                        bgr_value=[255, 0, 0, 255],
                                        border_dimension=10)
         self.assertEqual(img_bordered.shape, (2359, 1674, 4))
+
+
+class save_image(unittest.TestCase):
+    def test_single_save(self):
+        img = mem.open_image(
+            os.path.join(os.path.dirname(__file__), 'test_images',
+                         'memories_template.png'))
+        mem.save_image(img, os.path.join(os.path.dirname(__file__), 'test_images', 'single_save.jpg'))
+        self.assertTrue(os.path.join(os.path.dirname(__file__), 'test_images', 'single_save.jpg'))
