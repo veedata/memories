@@ -40,10 +40,33 @@ class test_operations(unittest.TestCase):
         self.assertEqual(img_bordered.shape, (2359, 1674, 4))
 
 
-class save_image(unittest.TestCase):
+class test_save_image(unittest.TestCase):
     def test_single_save(self):
         img = mem.open_image(
             os.path.join(os.path.dirname(__file__), 'test_images',
                          'memories_template.png'))
-        mem.save_image(img, os.path.join(os.path.dirname(__file__), 'test_images', 'single_save.jpg'))
-        self.assertTrue(os.path.join(os.path.dirname(__file__), 'test_images', 'single_save.jpg'))
+        mem.save_image(
+            img,
+            os.path.join(os.path.dirname(__file__), 'test_images',
+                         'single_save.jpg'))
+        self.assertTrue(
+            os.path.join(os.path.dirname(__file__), 'test_images',
+                         'single_save.jpg'))
+
+    def test_pdf_save(self):
+        mem.save_pdf([
+            os.path.join(os.path.dirname(__file__), 'test_images',
+                         'memories_template.png')
+        ],
+                     os.path.join(os.path.dirname(__file__), 'test_images',
+                                  'single_save.pdf'))
+        self.assertTrue(
+            os.path.join(os.path.dirname(__file__), 'test_images',
+                         'single_save.pdf'))
+
+    @classmethod
+    def tearDownClass(cls):
+        os.remove(os.path.join(os.path.dirname(__file__), 'test_images',
+                    'single_save.jpg'))    
+        os.remove(os.path.join(os.path.dirname(__file__), 'test_images',
+                    'single_save.pdf'))
