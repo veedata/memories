@@ -41,32 +41,29 @@ class test_operations(unittest.TestCase):
 
 
 class test_save_image(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.base_path = os.path.join(os.path.dirname(__file__), 'test_images')
+        cls.img = mem.open_image(
+            os.path.join(cls.base_path, 'memories_template.png'))
+
     def test_single_save(self):
-        img = mem.open_image(
-            os.path.join(os.path.dirname(__file__), 'test_images',
-                         'memories_template.png'))
-        mem.save_image(
-            img,
-            os.path.join(os.path.dirname(__file__), 'test_images',
-                         'single_save.jpg'))
-        self.assertTrue(
-            os.path.join(os.path.dirname(__file__), 'test_images',
-                         'single_save.jpg'))
+        mem.save_image(self.img, os.path.join(self.base_path,
+                                              'single_save.jpg'))
+        self.assertTrue(os.path.join(self.base_path, 'single_save.jpg'))
 
     def test_pdf_save(self):
-        mem.save_pdf([
-            os.path.join(os.path.dirname(__file__), 'test_images',
-                         'memories_template.png')
-        ],
-                     os.path.join(os.path.dirname(__file__), 'test_images',
-                                  'single_save.pdf'))
-        self.assertTrue(
-            os.path.join(os.path.dirname(__file__), 'test_images',
-                         'single_save.pdf'))
+        mem.save_pdf([os.path.join(self.base_path, 'memories_template.png')],
+                     os.path.join(self.base_path, 'single_save.pdf'))
+        self.assertTrue(os.path.join(self.base_path, 'single_save.pdf'))
+
+    def test_multiple_save(self):
+        img = mem.open_image(
+            os.path.join(self.base_path, 'memories_template.png'))
+        mem.save_image(img, os.path.join(self.base_path, 'single_save.jpg'))
+        self.assertTrue(os.path.join(self.base_path, 'single_save.jpg'))
 
     @classmethod
-    def tearDownClass(cls):
-        os.remove(os.path.join(os.path.dirname(__file__), 'test_images',
-                    'single_save.jpg'))    
-        os.remove(os.path.join(os.path.dirname(__file__), 'test_images',
-                    'single_save.pdf'))
+    def tearDownClass(cls, self):
+        os.remove(os.path.join(self.base_path, 'single_save.jpg'))
+        os.remove(os.path.join(self.base_path, 'single_save.pdf'))
