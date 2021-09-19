@@ -19,21 +19,21 @@ class test_image_loading(unittest.TestCase):
 
 
 class test_operations(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.base_path = os.path.join(os.path.dirname(__file__), 'test_images')
+        cls.img = mem.open_image(
+            os.path.join(cls.base_path, 'memories_template.png'))
+
     def test_normal_borders(self):
-        img = mem.open_image(
-            os.path.join(os.path.dirname(__file__), 'test_images',
-                         'memories_template.png'))
-        img_bordered = mem.make_border(img,
+        img_bordered = mem.make_border(self.img,
                                        border_type="normal",
                                        bgr_value=[255, 0, 0, 255],
                                        border_dimension=10)
         self.assertEqual(img_bordered.shape, (2359, 1674, 3))
 
     def test_curved_borders(self):
-        img = mem.open_image(
-            os.path.join(os.path.dirname(__file__), 'test_images',
-                         'memories_template.png'))
-        img_bordered = mem.make_border(img,
+        img_bordered = mem.make_border(self.img,
                                        border_type="curved",
                                        bgr_value=[255, 0, 0, 255],
                                        border_dimension=10)
