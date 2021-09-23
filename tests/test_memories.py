@@ -65,6 +65,18 @@ class test_save_image(unittest.TestCase):
         mem.save_image(self.img, save_path)
         self.assertTrue(os.path.isfile(save_path))
 
+    def test_multiple_save(self):
+        save_path = os.path.join(self.base_path, 'multi_save.jpg')
+        mem.save_image([self.img1, self.img2, self.img3], save_path)
+
+        img1_save_path = os.path.join(self.base_path, 'multi_save-0.jpg')
+        img2_save_path = os.path.join(self.base_path, 'multi_save-1.jpg')
+        img3_save_path = os.path.join(self.base_path, 'multi_save-2.jpg')
+
+        self.assertTrue(os.path.isfile(img1_save_path))
+        self.assertTrue(os.path.isfile(img2_save_path))
+        self.assertTrue(os.path.isfile(img3_save_path))
+
     def test_pdf_single_save(self):
         save_path = os.path.join(self.base_path, 'single_save.pdf')
         mem.save_pdf([self.img_path], save_path)
@@ -79,5 +91,8 @@ class test_save_image(unittest.TestCase):
     def tearDownClass(self):
         os.remove(os.path.join(self.base_path, 'single_save.jpg'))
         os.remove(os.path.join(self.base_path, 'single_save.png'))
+        os.remove(os.path.join(self.base_path, 'multi_save-0.jpg'))
+        os.remove(os.path.join(self.base_path, 'multi_save-1.jpg'))
+        os.remove(os.path.join(self.base_path, 'multi_save-2.jpg'))
         os.remove(os.path.join(self.base_path, 'single_save.pdf'))
         os.remove(os.path.join(self.base_path, 'multi_save.pdf'))
