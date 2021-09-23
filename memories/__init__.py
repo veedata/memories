@@ -1,4 +1,4 @@
-__version__ = "0.8"
+__version__ = "0.9"
 
 
 from .divider import divided_crop
