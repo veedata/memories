@@ -35,4 +35,5 @@ setuptools.setup(
     ],
     package_dir={"": "memories"},
     packages=setuptools.find_packages(where="memories"),
+    test_suite='tests',
 )
