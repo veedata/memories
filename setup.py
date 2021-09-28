@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name='memories',
-    version='0.9',
+    version='1.0.0',
     url='https://github.com/veedata/memories',
     download_url='https://github.com/veedata/memories/archive/refs/tags/v0.9-beta.tar.gz',
     author='Viraj Thakkar',
