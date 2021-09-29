@@ -7,7 +7,7 @@ setuptools.setup(
     name='memories',
     version='1.0.0',
     url='https://github.com/veedata/memories',
-    download_url='https://github.com/veedata/memories/archive/refs/tags/v0.9-beta.tar.gz',
+    download_url='https://github.com/veedata/memories/archive/refs/tags/v1.0.0-stable.tar.gz',
     author='Viraj Thakkar',
     author_email='vdthakkar111@gmail.com',
     description='A library for those who want to convert their older images into digitised format (with metadata), and beautify them using borders and other options.',
@@ -19,6 +19,7 @@ setuptools.setup(
         'Documentation': "https://memories.readthedocs.io/en/latest",
     },
     install_requires=[
+        'requests',
         'piexif',
         'opencv-python',
         'Pillow',
