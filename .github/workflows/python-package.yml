@@ -28,4 +28,4 @@ jobs:
     
     - name: Test
       run: |
-        python setup.py check
+        python setup.py test
