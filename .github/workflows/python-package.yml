@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [3.5, 3.6, 3.7, 3.8, 3.9]
+        python-version: [3.6, 3.7, 3.8, 3.9]
 
     steps:
     - uses: actions/checkout@v2
@@ -25,8 +25,8 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install setuptools wheel
-        python -m pip install .
         python -m pip install tox-gh-actions
+        python -m pip install .
     
     - name: Check package setup
       run: python setup.py check
