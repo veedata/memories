@@ -5,16 +5,13 @@ import sys
 
 def make_page(image_list: list, name_list: list, tag_list: list,
               output_path: str):
-    """Save a list of images in PDF format
+    """Generate HTML page from list of images
 
-    :param image_list: List of path to all images to be put in the HTML
-    :type image_list: list
-    :param name_list: List of names to be put in the HTML
-    :type name_list: list
-    :param tag_list: List of short line put in the HTML
-    :type tag_list: list
-    :param output_path: save path to the folder
-    :type output_path: str
+    Args:
+        image_list (list): List of path to all images to be put in the HTML
+        name_list (list): List of names to be put in the HTML
+        tag_list (list): List of short line put in the HTML
+        output_path (str): save path to the folder
     """
 
     if not (len(image_list) == len(name_list) == len(tag_list)):
