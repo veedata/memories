@@ -19,7 +19,8 @@ def make_page(image_list: list, name_list: list, tag_list: list,
         sys.exit(1)
 
     output_file_path = os.path.join(output_path, 'scrapbook.html')
-    f = open(output_file_path, 'w')
+    template_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                 "html_templates", "template1.html")
 
     dynamic_text = ""
 
@@ -39,47 +40,10 @@ def make_page(image_list: list, name_list: list, tag_list: list,
             </div>'''
         dynamic_text = dynamic_text + template_segment_text
 
-    static_text = f"""
-            <!doctype html>
-            <html lang="en">
+    with open(template_path, 'r') as file:
+        filedata = file.read()
 
-            <head>
-                <meta charset="utf-8">
-                <meta name="viewport"
-                    content="width=device-width, initial-scale=1">
+    filedata = filedata.replace(r'{dynamic_text}', dynamic_text)
 
-                <link
-                    href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
-                    rel="stylesheet"
-                    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
-                    crossorigin="anonymous">
-
-                <title>A Scrapbook Page</title>
-            </head>
-
-            <body>
-                <script
-                    src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
-                    integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
-                    crossorigin="anonymous"></script>
-
-                <br>
-                <br>
-
-                <div class="container">
-
-                    <div class="row row-cols-1 row-cols-md-3 g-4">
-                        {dynamic_text}
-                    </div>
-                </div>
-
-                <br>
-                <br>
-
-            </body>
-
-            </html>
-        """
-
-    f.write(static_text)
-    f.close()
+    with open(output_file_path, 'w') as file:
+        file.write(filedata)
