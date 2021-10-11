@@ -12,6 +12,7 @@ setuptools.setup(
     author_email='vdthakkar111@gmail.com',
     description='A library for those who want to convert their older images into digitised format (with metadata), and beautify them using borders and other options.',
     long_description=long_desc,
+    long_description_content_type='text/markdown',
     keywords=['computer vision', 'image processing', 'opencv', 'album'],
     project_urls={
         "Code": "https://github.com/veedata/memories",

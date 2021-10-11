@@ -38,7 +38,7 @@ Example
     memories.add_date("./image-1.jpg", "27/04/2021 12:00:03")
     memories.bulk_add_date("./", "27/04/2021 12:00:03")
  
-    memories.make_page(["./source_folder/image1.png", "./random/another_source_folder/image2.jpg"], ["CSS", "Larry"], ["SASS", "That one got to you, didnt it"], "./save_folder")
+    memories.make_page(["./folder1/image1.png", "./folder2/image2.jpg"], ["CSS", "Larry"], ["SASS", "Another line"], "./save_folder")
 
     image = memories.open_image("./image.png")
 
