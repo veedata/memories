@@ -4,14 +4,15 @@ import sys
 
 
 def make_page(image_list: list, name_list: list, tag_list: list,
-              output_path: str):
+              output_path: str, template: str):
     """Generate HTML page from list of images
 
     Args:
         image_list (list): List of path to all images to be put in the HTML
         name_list (list): List of names to be put in the HTML
         tag_list (list): List of short line put in the HTML
-        output_path (str): save path to the folder
+        output_path (str): Save path to the folder
+        template (str): Template name to use
     """
 
     if not (len(image_list) == len(name_list) == len(tag_list)):
