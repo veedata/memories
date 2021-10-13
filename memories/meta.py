@@ -53,6 +53,9 @@ def add_date_png(image_path: str, new_datetime: str) -> None:
     Args:
         image_path (str): path of image (png)
         new_datetime (str): Date in the format "day/month/year hours:mins:secs"
+
+    Todo:
+        Fix function
     """
 
     # This is in testing for now

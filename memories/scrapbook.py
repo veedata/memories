@@ -13,6 +13,9 @@ def make_page(image_list: list, name_list: list, tag_list: list,
         tag_list (list): List of short line put in the HTML
         output_path (str): Save path to the folder
         template (str): Template name to use
+
+    Todo:
+        Add more templates
     """
 
     if not (len(image_list) == len(name_list) == len(tag_list)):
