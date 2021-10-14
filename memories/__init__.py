@@ -14,3 +14,8 @@ from .save_as import save_image
 from .scrapbook import make_page
 
 from .border import make_border
+
+__all__ = [
+    "divided_crop", "add_date", "bulk_add_date", "add_date_png", "open_image",
+    "save_pdf", "save_image", "make_page", "make_border"
+]
