@@ -8,7 +8,11 @@ def make_border(input_image: np.ndarray,
                 border_dimension: list = None,
                 radius_dimension: list = None) -> None:
     """Add a border to the image.
-    Currently in development and can only make a solid color borders.
+
+    Function to add a straight or curved edge border to the image. The borders
+    can be individually sized, width for straight border type, and width +
+    radius curvature, both for curved border. This will make the border a part
+    of the image.
 
     Args:
         input_image (np.ndarray): The path of the input image is to be passed
@@ -20,6 +24,9 @@ def make_border(input_image: np.ndarray,
          Order is top, bottom, left, right. Defaults to 1% of max(ht, wt).
         radius_dimension (list, optional): The value (in pixels) of the corner
          radius, order is in top-right, top-left, bottom-right, bottom-left.
+
+    Todo:
+        Other types of border colors - gradiants and multicolor options
     """
 
     image = input_image
