@@ -7,6 +7,9 @@ def make_page(image_list: list, name_list: list, tag_list: list,
               output_path: str, template: str):
     """Generate HTML page from list of images
 
+    Makes a yearbook-like html page from the input details. Need to provide
+    list of path to all images, list of names, ist of tags and ouotput path.
+
     Args:
         image_list (list): List of path to all images to be put in the HTML
         name_list (list): List of names to be put in the HTML
@@ -16,6 +19,7 @@ def make_page(image_list: list, name_list: list, tag_list: list,
 
     Todo:
         Add more templates
+        Save input files in a folder too
     """
 
     if not (len(image_list) == len(name_list) == len(tag_list)):

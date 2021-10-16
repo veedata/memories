@@ -7,6 +7,9 @@ import logging
 def add_date(image_path: str, new_datetime: str) -> None:
     """Add date when the image was originally taken
 
+    Function based on piexif to add date to an image. Future plans to allow
+    for additon of all exif data that is possible.
+
     Args:
         image_path (str): path of image (jpg)
         new_datetime (str): Date in the format "day/month/year hours:mins:secs"
@@ -48,6 +51,7 @@ def bulk_add_date(folder_path: str, new_datetime: str) -> None:
 
 def add_date_png(image_path: str, new_datetime: str) -> None:
     """Add date when the image was originally taken for png images
+
     Under Testing and does not work currently!
 
     Args:
