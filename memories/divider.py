@@ -6,7 +6,7 @@ import copy
 def divided_crop(input_image: np.ndarray,
                  image_quantity: int = 4,
                  bgr_value: list = [255, 255, 255]) -> list:
-    """Divide a single image into multiple smaller ones. 
+    """Divide a single image into multiple smaller ones.
 
     Convert a cluster of images into individual images based on background
     color to find divisions. Image quantity is used in order to get a better
