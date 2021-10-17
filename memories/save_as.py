@@ -67,6 +67,7 @@ def save_image(input_image: np.ndarray or list, output_path: str) -> None:
     """
 
     file_path, file_name = os.path.split(output_path)
+    os.makedirs(file_path,  exist_ok=True)
     file_name, file_extension = file_name.split(".")[0], file_name.split(
         ".")[-1]
 

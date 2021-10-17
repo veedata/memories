@@ -26,6 +26,7 @@ def make_page(image_list: list, name_list: list, tag_list: list,
         logging.error("The lengths of the inputs differ")
         sys.exit(1)
 
+    os.makedirs(output_path,  exist_ok=True)
     output_file_path = os.path.join(output_path, 'scrapbook.html')
     template_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                  "html_templates", "template1.html")

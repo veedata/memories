@@ -6,7 +6,7 @@ def make_border(input_image: np.ndarray,
                 border_type: str = "normal",
                 bgr_value: list = [255, 255, 255, 255],
                 border_dimension: list = None,
-                radius_dimension: list = None) -> None:
+                radius_dimension: list = None) -> np.ndarray:
     """Add a border to the image.
 
     Function to add a straight or curved edge border to the image. The borders
