@@ -4,7 +4,8 @@ import sys
 
 
 def make_page(image_list: list, name_list: list, tag_list: list,
-              output_path: str, template: str):
+              output_path: str, template: str,
+              template_args: list = {'border-color': 'default'}):
     """Generate HTML page from list of images
 
     Makes a yearbook-like html page from the input details. Need to provide
@@ -16,6 +17,7 @@ def make_page(image_list: list, name_list: list, tag_list: list,
         tag_list (list): List of short line put in the HTML
         output_path (str): Save path to the folder
         template (str): Template name to use
+        template_args (dict): Additional settings in the template
 
     Todo:
         Add more templates
@@ -26,7 +28,7 @@ def make_page(image_list: list, name_list: list, tag_list: list,
         logging.error("The lengths of the inputs differ")
         sys.exit(1)
 
-    os.makedirs(output_path,  exist_ok=True)
+    os.makedirs(output_path, exist_ok=True)
     output_file_path = os.path.join(output_path, 'scrapbook.html')
     template_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                  "html_templates", "template1.html")
@@ -36,7 +38,7 @@ def make_page(image_list: list, name_list: list, tag_list: list,
     for i in range(len(image_list)):
         template_segment_text = f'''
             <div class="col">
-                <div class="card h-100 border-primary">
+                <div class="card h-100 border-{template_args['border-color']}">
                     <div style="padding: 1em;">
                         <img src="{image_list[i]}"
                             class="rounded-3 card-img-top" alt="...">
