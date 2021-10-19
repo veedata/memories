@@ -9,15 +9,22 @@ build-backend = "setuptools.build_meta"
 legacy_tox_ini = """
 
 [tox]
-envlist = py36, py37, py38, py39
+envlist = py36, py37, py38, py39, flake8
 
 [gh-actions]
 python =
-    3.6: py36
-    3.7: py37
-    3.8: py38
-    3.9: py39
+    3.6: py36, flake8
+    3.7: py37, flake8
+    3.8: py38, flake8
+    3.9: py39, flake8
 
 [testenv]
 commands = python -m unittest discover
+
+[testenv:flake8]
+deps =
+    flake8
+
+commands =
+    flake8 memories/
 """

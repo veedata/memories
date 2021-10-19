@@ -6,22 +6,27 @@ def make_border(input_image: np.ndarray,
                 border_type: str = "normal",
                 bgr_value: list = [255, 255, 255, 255],
                 border_dimension: list = None,
-                radius_dimension: list = None) -> None:
+                radius_dimension: list = None) -> np.ndarray:
     """Add a border to the image.
-    Currently in development and can only make a solid color borders.
 
-    :param input_image: The path of the input image is to be passed
-    :type input_image: np.ndarray
-    :param border_type: Select border type - normal, curved (default is normal)
-    :type border_type: str
-    :param bgr_value: The BGR value of the background in a list ([B, G, R, A])
-    :type bgr_value: list, optional
-    :param border_dimension: The value (in pixels) of the border to be made,
-     order is top, bottom, left, right. Default is 1% of max(height, width)
-    :type border_dimension: list, optional
-    :param radius_dimension: The value (in pixels) of the curvature of radius,
-     order is in top-right, top-left, bottom-right, bottom-left.
-    :type radius_dimension: list, optional
+    Function to add a straight or curved edge border to the image. The borders
+    can be individually sized, width for straight border type, and width +
+    radius curvature, both for curved border. This will make the border a part
+    of the image.
+
+    Args:
+        input_image (np.ndarray): The path of the input image is to be passed
+        border_type (str, optional): Select border type - normal, curved.
+         Defaults to "normal".
+        bgr_value (list, optional): The BGRA value of the background in a list
+         ([B, G, R, A]). Defaults to [255, 255, 255, 255].
+        border_dimension (list, optional): The value (in pixels) of border.
+         Order is top, bottom, left, right. Defaults to 1% of max(ht, wt).
+        radius_dimension (list, optional): The value (in pixels) of the corner
+         radius, order is in top-right, top-left, bottom-right, bottom-left.
+
+    Todo:
+        Other types of border colors - gradiants and multicolor options
     """
 
     image = input_image

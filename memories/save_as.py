@@ -5,11 +5,16 @@ import requests
 
 
 def open_image(image_path: str) -> np.ndarray:
-    """Takes an image path as input and returns the image file to the user.
+    """Open image as array
+
+    Takes an image path as input and returns the image file to the user.
     Can be then used for further processing or to save in any format required.
 
-    :param image_path: Path to image to be saved
-    :type image_path: str
+    Args:
+        image_path (str): Path to image to be saved
+
+    Returns:
+        np.ndarray: PIL formatted image as array
     """
 
     if image_path.startswith('http'):
@@ -24,13 +29,18 @@ def open_image(image_path: str) -> np.ndarray:
 
 
 def save_pdf(image_list: list, output_path: str) -> None:
-    """Save a list of images in PDF format
-    -> Need to update
+    """Save a list of image(s) in PDF format
 
-    :param image_list: List of path to all images to be saved
-    :type image_list: list
-    :param output_path: The path (including file name) where PDF is to be saved
-    :type output_path: str
+    When provided with a list of image paths, and savefolder, this will create
+    a pdf file with all the images (at their full resolution).
+
+    Args:
+        image_list (list): List of path to all images to be saved
+        output_path (str): The file path where PDF is to be saved
+
+    Todo:
+        Make function more in-line with other function inputs
+        Option to normalise image size in pdfs
     """
 
     updated_image_list = []
@@ -44,16 +54,20 @@ def save_pdf(image_list: list, output_path: str) -> None:
                                append_images=updated_image_list[1:])
 
 
-def save_image(input_image: np.ndarray, output_path: str) -> None:
+def save_image(input_image: np.ndarray or list, output_path: str) -> None:
     """Save an image or list of image in any format you want
 
-    :param input_image: Image to be saved
-    :type input_image: str or list
-    :param output_path: The output file path in which the image is to be saved
-    :type output_path: str
+    Implementation of PIL to save image or list of images to an output folder.
+    Needs the output path with the file extension in either case and
+    input_image should be np.ndarray or list of np.ndarray.
+
+    Args:
+        input_image (np.ndarray or list): Image to be saved
+        output_path (str): output file path where image is to be saved
     """
 
     file_path, file_name = os.path.split(output_path)
+    os.makedirs(file_path,  exist_ok=True)
     file_name, file_extension = file_name.split(".")[0], file_name.split(
         ".")[-1]
 

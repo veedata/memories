@@ -7,10 +7,12 @@ import logging
 def add_date(image_path: str, new_datetime: str) -> None:
     """Add date when the image was originally taken
 
-    :param image_path: The path of the input image is to be passed
-    :type image_path: str
-    :param new_datetime: Date in the format "day/month/year hours:mins:secs"
-    :type new_datetime: str
+    Function based on piexif to add date to an image. Future plans to allow
+    for additon of all exif data that is possible.
+
+    Args:
+        image_path (str): path of image (jpg)
+        new_datetime (str): Date in the format "day/month/year hours:mins:secs"
     """
 
     try:
@@ -36,10 +38,9 @@ def add_date(image_path: str, new_datetime: str) -> None:
 def bulk_add_date(folder_path: str, new_datetime: str) -> None:
     """Add date to all images in a folder
 
-    :param folder_path: The path of folder
-    :type folder_path: str
-    :param new_datetime: Date in the format "day/month/year hours:mins:secs"
-    :type new_datetime: str
+    Args:
+        folder_path (str): The path of folder
+        new_datetime (str): Date in the format "day/month/year hours:mins:secs"
     """
 
     for (dir_path, dir_names, file_names) in os.walk(folder_path):
@@ -50,12 +51,15 @@ def bulk_add_date(folder_path: str, new_datetime: str) -> None:
 
 def add_date_png(image_path: str, new_datetime: str) -> None:
     """Add date when the image was originally taken for png images
+
     Under Testing and does not work currently!
 
-    :param image_path: The path of the input image is to be passed
-    :type image_path: str
-    :param new_datetime: Date in the format "day/month/year hours:mins:secs"
-    :type new_datetime: str
+    Args:
+        image_path (str): path of image (png)
+        new_datetime (str): Date in the format "day/month/year hours:mins:secs"
+
+    Todo:
+        Fix function
     """
 
     # This is in testing for now

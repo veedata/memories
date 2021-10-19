@@ -31,5 +31,8 @@ jobs:
     - name: Check package setup
       run: python setup.py check
 
-    - name: Test
+    - name: Formatting test
+      run: tox -e flake8
+
+    - name: Unittest
       run: tox
