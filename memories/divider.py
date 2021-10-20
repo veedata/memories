@@ -21,6 +21,9 @@ def divided_crop(input_image: np.ndarray,
 
     Returns:
         list: np.ndarray list containing all cropped out images
+
+    Todo:
+        Corrections in detection, thresh is okay but fails ahead of that.
     """
 
     image = input_image
@@ -50,21 +53,7 @@ def divided_crop(input_image: np.ndarray,
                         min(int(hsv_value[2]) + 25, 255))
 
         thresh = cv2.inRange(image_rot_hsv, lower_thresh, upper_thresh)
-
-    else:
-        # Soon to be retired part.. will be merged with above
-        # when smaller optimisations are made to the above code
-        image = cv2.copyMakeBorder(image,
-                                   border_dim,
-                                   border_dim,
-                                   border_dim,
-                                   border_dim,
-                                   cv2.BORDER_CONSTANT,
-                                   value=bgr_value)
-
-        image_rot_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-        ret, thresh = cv2.threshold(image_rot_gray, 205, 255,
-                                    cv2.THRESH_BINARY_INV)
+        thresh = cv2.bitwise_not(thresh)
 
     contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE,
                                            cv2.CHAIN_APPROX_SIMPLE)
