@@ -27,6 +27,7 @@ def divided_crop(input_image: np.ndarray,
     """
 
     image = input_image
+    image_quantity = image_quantity + 7
 
     h, w, channels = image.shape
     image_area = h * w
