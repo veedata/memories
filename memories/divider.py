@@ -30,7 +30,6 @@ def divided_crop(input_image: np.ndarray,
     image_quantity = image_quantity + 7
 
     h, w, channels = image.shape
-    image_area = h * w
     border_dim = max(image.shape[0], image.shape[1]) // 100
 
     if bgr_value != [255, 255, 255]:
@@ -58,40 +57,38 @@ def divided_crop(input_image: np.ndarray,
 
     contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE,
                                            cv2.CHAIN_APPROX_SIMPLE)
+    contours = sorted(contours, key=cv2.contourArea, reverse=True)
 
     divided_images = []
-    for cnt in contours:
+    for each_image in range(0, image_quantity):
 
-        rect = cv2.minAreaRect(cnt)
+        rect = cv2.minAreaRect(contours[each_image])
         box = cv2.boxPoints(rect)
         box = np.int0(box)
-        rect_area = rect[1][0] * rect[1][1]
 
-        if rect_area * image_quantity > image_area:
+        # rotate the image
+        image_rect_area = rect[2] + 90
+        if image_rect_area >= 45:
+            image_rect_area = image_rect_area - 90
 
-            # rotate the image
-            image_rect_area = rect[2] + 90
-            if image_rect_area >= 45:
-                image_rect_area = image_rect_area - 90
+        rot = cv2.getRotationMatrix2D((w / 2, h / 2), image_rect_area, 1)
+        result_img = cv2.warpAffine(copy.deepcopy(image),
+                                    rot, (w, h),
+                                    flags=cv2.INTER_LINEAR)
 
-            rot = cv2.getRotationMatrix2D((w / 2, h / 2), image_rect_area, 1)
-            result_img = cv2.warpAffine(copy.deepcopy(image),
-                                        rot, (w, h),
-                                        flags=cv2.INTER_LINEAR)
+        # rotate points
+        pts = np.int0(cv2.transform(np.array([box]), rot))[0]
 
-            # rotate points
-            pts = np.int0(cv2.transform(np.array([box]), rot))[0]
+        all_x_coords = [i[0] for i in pts]
+        all_y_coords = [i[1] for i in pts]
 
-            all_x_coords = [i[0] for i in pts]
-            all_y_coords = [i[1] for i in pts]
+        top_left_x, top_left_y = int(min(all_x_coords)), int(
+            min(all_y_coords))
+        bottom_right_x, bottom_right_y = int(max(all_x_coords)), int(
+            max(all_y_coords))
 
-            top_left_x, top_left_y = int(min(all_x_coords)), int(
-                min(all_y_coords))
-            bottom_right_x, bottom_right_y = int(max(all_x_coords)), int(
-                max(all_y_coords))
-
-            img_crop = result_img[top_left_y:bottom_right_y,
-                                  top_left_x:bottom_right_x]
-            divided_images.append(img_crop)
+        img_crop = result_img[top_left_y:bottom_right_y,
+                              top_left_x:bottom_right_x]
+        divided_images.append(img_crop)
 
     return divided_images
