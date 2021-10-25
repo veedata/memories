@@ -21,48 +21,43 @@ def divided_crop(input_image: np.ndarray,
 
     Returns:
         list: np.ndarray list containing all cropped out images
-
-    Todo:
-        Corrections in detection, thresh is okay but fails ahead of that.
     """
 
     image = input_image
-    image_quantity = image_quantity + 7
 
     h, w, channels = image.shape
     border_dim = max(image.shape[0], image.shape[1]) // 100
 
-    if bgr_value != [255, 255, 255]:
-        image = cv2.copyMakeBorder(image,
-                                   border_dim,
-                                   border_dim,
-                                   border_dim,
-                                   border_dim,
-                                   cv2.BORDER_CONSTANT,
-                                   value=bgr_value)
-        bgr_value = np.uint8([[bgr_value]])
+    image = cv2.copyMakeBorder(image,
+                                border_dim,
+                                border_dim,
+                                border_dim,
+                                border_dim,
+                                cv2.BORDER_CONSTANT,
+                                value=bgr_value)
+    bgr_value = np.uint8([[bgr_value]])
 
-        hsv_value = list(cv2.cvtColor(bgr_value, cv2.COLOR_BGR2HSV)[0][0])
-        image_rot_hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+    hsv_value = list(cv2.cvtColor(bgr_value, cv2.COLOR_BGR2HSV)[0][0])
+    image_rot_hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 
-        lower_thresh = (max(int(hsv_value[0]) - 5, 0),
-                        max(int(hsv_value[1]) - 20, 0),
-                        max(int(hsv_value[2]) - 25, 0))
-        upper_thresh = (min(int(hsv_value[0]) + 5, 180),
-                        min(int(hsv_value[1]) + 20, 255),
-                        min(int(hsv_value[2]) + 25, 255))
+    lower_thresh = (max(int(hsv_value[0]) - 5, 0),
+                    max(int(hsv_value[1]) - 20, 0),
+                    max(int(hsv_value[2]) - 25, 0))
+    upper_thresh = (min(int(hsv_value[0]) + 5, 180),
+                    min(int(hsv_value[1]) + 20, 255),
+                    min(int(hsv_value[2]) + 25, 255))
 
-        thresh = cv2.inRange(image_rot_hsv, lower_thresh, upper_thresh)
-        thresh = cv2.bitwise_not(thresh)
+    thresh = cv2.inRange(image_rot_hsv, lower_thresh, upper_thresh)
+    thresh = cv2.bitwise_not(thresh)
 
     contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE,
                                            cv2.CHAIN_APPROX_SIMPLE)
     contours = sorted(contours, key=cv2.contourArea, reverse=True)
 
     divided_images = []
-    for each_image in range(0, image_quantity):
+    for image_number in range(0, image_quantity):
 
-        rect = cv2.minAreaRect(contours[each_image])
+        rect = cv2.minAreaRect(contours[image_number])
         box = cv2.boxPoints(rect)
         box = np.int0(box)
 
