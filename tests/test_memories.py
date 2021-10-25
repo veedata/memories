@@ -40,6 +40,19 @@ class test_operations(unittest.TestCase):
         self.assertEqual(img_bordered.shape, (2359, 1674, 4))
 
 
+class test_divider(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.base_path = os.path.join(os.path.dirname(__file__), 'test_images')
+        cls.img = mem.open_image(
+            os.path.join(cls.base_path, 'memories_template.png'))
+
+    def test_split_images(self):
+        split_images = mem.divided_crop(self.img, image_quantity=5,
+                                        bgr_value=[255, 255, 255])
+        self.assertEqual(len(split_images), 5)
+
+
 class test_save_image(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
