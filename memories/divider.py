@@ -4,7 +4,7 @@ import copy
 
 
 def divided_crop(input_image: np.ndarray,
-                 image_quantity: int = 4,
+                 image_quantity: int,
                  bgr_value: list = [255, 255, 255]) -> list:
     """Divide a single image into multiple smaller ones.
 
@@ -15,7 +15,7 @@ def divided_crop(input_image: np.ndarray,
     Args:
         input_image (np.ndarray): The path of the input image is to be passed
         image_quantity (int, optional): Number of images that are present
-         in the pic. Defaults to 4.
+         in the pic.
         bgr_value (list, optional): The approx BGR value of the background
          in a list. Defaults to [255, 255, 255].
 
