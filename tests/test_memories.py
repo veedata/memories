@@ -47,10 +47,24 @@ class test_divider(unittest.TestCase):
         cls.img = mem.open_image(
             os.path.join(cls.base_path, 'memories_template.png'))
 
-    def test_split_images(self):
+    def test_images_quantity(self):
         split_images = mem.divided_crop(self.img, image_quantity=5,
                                         bgr_value=[255, 255, 255])
         self.assertEqual(len(split_images), 5)
+
+    # def test_images_crop(self):
+        # split_images = mem.divided_crop(self.img, image_quantity=5,
+        #                                 bgr_value=[255, 255, 255])
+        # mem.save_image(split_images, os.path.join(self.base_path, 'image.jpg'))
+        # self.assertEqual()
+
+    # @classmethod
+    # def tearDownClass(self):
+    #     os.remove(os.path.join(self.base_path, 'image0.jpg'))
+    #     os.remove(os.path.join(self.base_path, 'image1.jpg'))
+    #     os.remove(os.path.join(self.base_path, 'image2.jpg'))
+    #     os.remove(os.path.join(self.base_path, 'image3.jpg'))
+    #     os.remove(os.path.join(self.base_path, 'image4.jpg'))
 
 
 class test_save_image(unittest.TestCase):
