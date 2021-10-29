@@ -29,12 +29,12 @@ def divided_crop(input_image: np.ndarray,
     border_dim = max(image.shape[0], image.shape[1]) // 100
 
     image = cv2.copyMakeBorder(image,
-                                border_dim,
-                                border_dim,
-                                border_dim,
-                                border_dim,
-                                cv2.BORDER_CONSTANT,
-                                value=bgr_value)
+                               border_dim,
+                               border_dim,
+                               border_dim,
+                               border_dim,
+                               cv2.BORDER_CONSTANT,
+                               value=bgr_value)
     bgr_value = np.uint8([[bgr_value]])
 
     hsv_value = list(cv2.cvtColor(bgr_value, cv2.COLOR_BGR2HSV)[0][0])
@@ -83,7 +83,18 @@ def divided_crop(input_image: np.ndarray,
             max(all_y_coords))
 
         img_crop = result_img[top_left_y:bottom_right_y,
-                              top_left_x:bottom_right_x]
+                              top_left_x:bottom_right_x].copy()
         divided_images.append(img_crop)
+
+        # print(top_left_x, top_left_y, bottom_right_x, bottom_right_y)
+
+        # cv2.rectangle(image, (top_left_x, top_left_y),
+        # (bottom_right_x, bottom_right_y), (255, 0, 0), 2)
+        # cv2.namedWindow('img',cv2.WINDOW_NORMAL)
+        # cv2.resizeWindow('img', 600,600)
+        # cv2.imshow("img", image)
+        # cv2.imwrite("img.jpg", img_crop)
+        # cv2.imshow("img", img_crop)
+        # cv2.waitKey(0)
 
     return divided_images
