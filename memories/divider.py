@@ -3,6 +3,40 @@ import numpy as np
 import copy
 
 
+def rotate_image(mat: np.ndarray, angle: int):
+    """Rotates the image without cropping the edges
+
+    Args:
+        mat (np.ndarray): Your input Image array
+        angle (int): Rotation angle
+
+    Returns:
+        np.ndarray: Rotated image as output
+        np.ndarray: Rotation matrix
+    """
+
+    height, width = mat.shape[:2]
+    image_center = (width / 2, height / 2)
+
+    rotation_mat = cv2.getRotationMatrix2D(image_center, angle, 1)
+
+    abs_cos = abs(rotation_mat[0, 0])
+    abs_sin = abs(rotation_mat[0, 1])
+
+    bound_w = int(height * abs_sin + width * abs_cos)
+    bound_h = int(height * abs_cos + width * abs_sin)
+
+    rotation_mat[0, 2] += bound_w / 2 - image_center[0]
+    rotation_mat[1, 2] += bound_h / 2 - image_center[1]
+
+    rotated_mat = cv2.warpAffine(mat,
+                                 rotation_mat, (bound_w, bound_h),
+                                 flags=cv2.INTER_LINEAR)
+    print(type(rotated_mat))
+
+    return rotated_mat, rotation_mat
+
+
 def divided_crop(input_image: np.ndarray,
                  image_quantity: int,
                  bgr_value: list = [255, 255, 255]) -> list:
@@ -66,10 +100,7 @@ def divided_crop(input_image: np.ndarray,
         if image_rect_area >= 45:
             image_rect_area = image_rect_area - 90
 
-        rot = cv2.getRotationMatrix2D((w / 2, h / 2), image_rect_area, 1)
-        result_img = cv2.warpAffine(copy.deepcopy(image),
-                                    rot, (w, h),
-                                    flags=cv2.INTER_LINEAR)
+        result_img, rot = rotate_image(copy.deepcopy(image), image_rect_area)
 
         # rotate points
         pts = np.int0(cv2.transform(np.array([box]), rot))[0]
@@ -77,24 +108,12 @@ def divided_crop(input_image: np.ndarray,
         all_x_coords = [i[0] for i in pts]
         all_y_coords = [i[1] for i in pts]
 
-        top_left_x, top_left_y = int(min(all_x_coords)), int(
-            min(all_y_coords))
+        top_left_x, top_left_y = int(min(all_x_coords)), int(min(all_y_coords))
         bottom_right_x, bottom_right_y = int(max(all_x_coords)), int(
             max(all_y_coords))
 
         img_crop = result_img[top_left_y:bottom_right_y,
                               top_left_x:bottom_right_x].copy()
         divided_images.append(img_crop)
-
-        # print(top_left_x, top_left_y, bottom_right_x, bottom_right_y)
-
-        # cv2.rectangle(image, (top_left_x, top_left_y),
-        # (bottom_right_x, bottom_right_y), (255, 0, 0), 2)
-        # cv2.namedWindow('img',cv2.WINDOW_NORMAL)
-        # cv2.resizeWindow('img', 600,600)
-        # cv2.imshow("img", image)
-        # cv2.imwrite("img.jpg", img_crop)
-        # cv2.imshow("img", img_crop)
-        # cv2.waitKey(0)
 
     return divided_images
