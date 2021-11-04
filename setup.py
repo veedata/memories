@@ -25,6 +25,11 @@ setuptools.setup(
         'opencv-python',
         'Pillow',
     ],
+    extras_require={
+        'test': [
+            'imagehash',
+        ]
+    },
     classifiers=[
         'Operating System :: OS Independent',
         'Development Status :: 5 - Production/Stable',

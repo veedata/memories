@@ -20,11 +20,10 @@ python =
 
 [testenv]
 commands = python -m unittest discover
+deps = .[test]
 
 [testenv:flake8]
-deps =
-    flake8
+commands = flake8 memories/
+deps = flake8
 
-commands =
-    flake8 memories/
 """
