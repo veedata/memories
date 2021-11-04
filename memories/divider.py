@@ -95,8 +95,8 @@ def divided_crop(input_image: np.ndarray,
         box = np.int0(box)
 
         # rotate the image
-        image_rect_area = rect[2] + 90
-        if image_rect_area >= 45:
+        image_rect_area = rect[2]
+        if rect[2] >= 45:
             image_rect_area = image_rect_area - 90
 
         result_img, rot = rotate_image(copy.deepcopy(image), image_rect_area)
