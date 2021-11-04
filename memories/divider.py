@@ -32,8 +32,7 @@ def rotate_image(mat: np.ndarray, angle: int):
     rotated_mat = cv2.warpAffine(mat,
                                  rotation_mat, (bound_w, bound_h),
                                  flags=cv2.INTER_LINEAR)
-    print(type(rotated_mat))
-
+    
     return rotated_mat, rotation_mat
 
 
