@@ -1,5 +1,7 @@
 import unittest
 import os
+import imagehash
+from PIL import Image
 
 import memories as mem
 
@@ -48,23 +50,39 @@ class test_divider(unittest.TestCase):
             os.path.join(cls.base_path, 'memories_template.png'))
 
     def test_images_quantity(self):
-        split_images = mem.divided_crop(self.img, image_quantity=5,
+        split_images = mem.divided_crop(self.img,
+                                        image_quantity=5,
                                         bgr_value=[255, 255, 255])
         self.assertEqual(len(split_images), 5)
 
-    # def test_images_crop(self):
-        # split_images = mem.divided_crop(self.img, image_quantity=5,
-        #                                 bgr_value=[255, 255, 255])
-        # mem.save_image(split_images, os.path.join(self.base_path, 'image.jpg'))
-        # self.assertEqual()
+    def test_images_crop(self):
 
-    # @classmethod
-    # def tearDownClass(self):
-    #     os.remove(os.path.join(self.base_path, 'image0.jpg'))
-    #     os.remove(os.path.join(self.base_path, 'image1.jpg'))
-    #     os.remove(os.path.join(self.base_path, 'image2.jpg'))
-    #     os.remove(os.path.join(self.base_path, 'image3.jpg'))
-    #     os.remove(os.path.join(self.base_path, 'image4.jpg'))
+        def hash_check(image_hash):
+            hash_list = []
+
+            for i in range(1, 6):
+                org_image = mem.open_image(
+                    os.path.join(self.base_path, 'image' + str(i) + '.jpg'))
+                org_hash = imagehash.average_hash(Image.fromarray(org_image))
+
+                hash_list.append(org_hash - image_hash)
+
+            return hash_list
+
+        split_image = mem.divided_crop(self.img,
+                                       image_quantity=5,
+                                       bgr_value=[255, 255, 255])
+
+        result_list = []
+        for image in split_image:
+            image_hash = imagehash.average_hash(Image.fromarray(image))
+
+            hash_list = hash_check(image_hash)
+
+            if min(hash_list) < 5:
+                result_list.append(1)
+
+        self.assertEqual(sum(result_list), 4)
 
 
 class test_save_image(unittest.TestCase):
