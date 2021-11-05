@@ -30,3 +30,11 @@ jobs:
       run: |
         python -m build
         twine upload dist/*
+
+    - uses: actions/upload-artifact@v2
+      if: ${{ always() }}
+      with:
+        name: artifacts
+        path: |
+          dist/*.whl
+          dist/*.exe
