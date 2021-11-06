@@ -57,8 +57,6 @@ def divided_crop(input_image: np.ndarray,
     """
 
     image = input_image
-
-    h, w, channels = image.shape
     border_dim = max(image.shape[0], image.shape[1]) // 100
 
     image = cv2.copyMakeBorder(image,
