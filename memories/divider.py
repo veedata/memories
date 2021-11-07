@@ -36,7 +36,7 @@ def rotate_image(mat: np.ndarray, angle: int):
     return rotated_mat, rotation_mat
 
 
-def divided_crop(input_image: np.ndarray,
+def divided_crop(image: np.ndarray,
                  image_quantity: int,
                  bgr_value: list = [255, 255, 255]) -> list:
     """Divide a single image into multiple smaller ones.
@@ -46,7 +46,7 @@ def divided_crop(input_image: np.ndarray,
     accuracy and reduce noise in the process.
 
     Args:
-        input_image (np.ndarray): The path of the input image is to be passed
+        image (np.ndarray): The path of the input image is to be passed
         image_quantity (int, optional): Number of images that are present
          in the pic.
         bgr_value (list, optional): The approx BGR value of the background
@@ -56,7 +56,6 @@ def divided_crop(input_image: np.ndarray,
         list: np.ndarray list containing all cropped out images
     """
 
-    image = input_image
     border_dim = max(image.shape[0], image.shape[1]) // 100
 
     image = cv2.copyMakeBorder(image,
