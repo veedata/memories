@@ -40,7 +40,7 @@ def save_image(input_image: np.ndarray or list, output_path: str) -> None:
     Args:
         input_image (np.ndarray or list): Image to be saved
         output_path (str): output file path where image is to be saved
-    
+
     Todo:
         Improve readability of docstring and function documentation
     """
