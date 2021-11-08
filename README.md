@@ -67,7 +67,7 @@ Current features that are present are:
 5. Documentation
 6. Border
 
-Future features can also be found at [Features](https://github.com/veedata/album-manager/projects):
+Future features can also be found [here](https://github.com/veedata/album-manager/projects):
 1. Collage
 2. Image Age identifyer
 
