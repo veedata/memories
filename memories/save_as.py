@@ -43,6 +43,7 @@ def save_image(input_image: np.ndarray or list, output_path: str) -> None:
 
     Todo:
         Improve readability of docstring and function documentation
+        Fix documentation
     """
 
     file_path, file_name = os.path.split(output_path)

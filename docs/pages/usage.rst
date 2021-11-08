@@ -81,4 +81,4 @@ The save as pdf function takes a list of images as input and produces a pdf with
     # Save multiple images at once
     mem.save_image([image1, image2, image3], "path/to/save_folder/file.extention")
     # Save multiple images as a pdf
-    mem.save_pdf(["img-1.png", "img-1.jpg", "img-2.jpg"], "path/to/save_folder/file.pdf")
+    mem.save_image(["img-1.png", "img-1.jpg", "img-2.jpg"], "path/to/save_folder/file.pdf")

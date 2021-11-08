@@ -25,10 +25,10 @@ There are 8 functions at the time being:
 - ``divided_crop``: Takes 3 inputs, the path to the image, the path where the outful folder should be and the number of images present in the input file. It performs the task of dividing a single image into multiple smaller ones. 
 - ``add_date``: Takes input as the image path and the datetime to be added. it will add date when the image was originally taken.
 - ``bulk_add_date``: Same as addDate, except it will add date to all images in a folder. The inputs are the folder path and datetime.
-- ``save_pdf``: Converts a list of images (one or more) into a PDF
 - ``save_image``: Converts a single image into another format
 - ``make_page``: Creates a year book like page in HTML
 - ``make_border``: Creates a border around the image
+- ``rotate_image``: Returns a rotated image
 
 
 Example
@@ -61,4 +61,4 @@ An example code for each appplication::
     # Save multiple images at once
     memories.save_image([image1, image2, image3], "path/to/save_folder/file.extention")
     # Save multiple images as a pdf
-    memories.save_pdf(["img-1.png", "img-1.jpg", "img-2.jpg"], "path/to/save_folder/file.pdf")
+    memories.save_image(["img-1.png", "img-1.jpg", "img-2.jpg"], "path/to/save_folder/file.pdf")
