@@ -31,19 +31,17 @@ def open_image(image_path: str) -> np.ndarray:
 def save_image(input_image: np.ndarray or list, output_path: str) -> None:
     """Save an image or list of image in any format you want
 
-    Implementation of PIL to save image or list of images to an output folder.
+    Implementation to save an image or list of images to an output folder.
     Needs the output path with the file extension in either case and
-    input_image should be np.ndarray or list of np.ndarray. When provided with
-    a list of image paths, and savefolder, this will create a pdf file with all
-    the images (at their full resolution).
+    input_image should be np.ndarray or list of np.ndarray. Saving to pdf needs
+    a list of image paths, and folder name, will create pdf (full resolution).
 
     Args:
         input_image (np.ndarray or list): Image to be saved
         output_path (str): output file path where image is to be saved
 
     Todo:
-        Improve readability of docstring and function documentation
-        Fix documentation
+        Make function more uniform. pdf needs file path, others need open file.
     """
 
     file_path, file_name = os.path.split(output_path)
