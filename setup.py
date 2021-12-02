@@ -5,9 +5,9 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name='memories',
-    version='1.0.0',
+    version='1.0.1',
     url='https://github.com/veedata/memories',
-    download_url='https://github.com/veedata/memories/archive/refs/tags/v1.0.0-stable.tar.gz',
+    download_url='https://github.com/veedata/memories/archive/refs/tags/v1.0.1-stable.tar.gz',
     author='Viraj Thakkar',
     author_email='vdthakkar111@gmail.com',
     description='A library for those who want to convert their older images into digitised format (with metadata), and beautify them using borders and other options.',
@@ -39,6 +39,7 @@ setuptools.setup(
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
     ],
     package_dir={"": "memories"},
     packages=setuptools.find_packages(where="memories"),
