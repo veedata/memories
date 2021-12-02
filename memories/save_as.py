@@ -28,55 +28,43 @@ def open_image(image_path: str) -> np.ndarray:
     return image
 
 
-def save_pdf(image_list: list, output_path: str) -> None:
-    """Save a list of image(s) in PDF format
-
-    When provided with a list of image paths, and savefolder, this will create
-    a pdf file with all the images (at their full resolution).
-
-    Args:
-        image_list (list): List of path to all images to be saved
-        output_path (str): The file path where PDF is to be saved
-
-    Todo:
-        Make function more in-line with other function inputs
-        Option to normalise image size in pdfs
-    """
-
-    updated_image_list = []
-    for each_path in image_list:
-        updated_image_list.append(Image.open(each_path).convert("RGB"))
-
-    updated_image_list[0].save(output_path,
-                               "PDF",
-                               resolution=100.0,
-                               save_all=True,
-                               append_images=updated_image_list[1:])
-
-
 def save_image(input_image: np.ndarray or list, output_path: str) -> None:
     """Save an image or list of image in any format you want
 
-    Implementation of PIL to save image or list of images to an output folder.
+    Implementation to save an image or list of images to an output folder.
     Needs the output path with the file extension in either case and
-    input_image should be np.ndarray or list of np.ndarray.
+    input_image should be np.ndarray or list of np.ndarray. Saving to pdf needs
+    a list of image paths, and folder name, will create pdf (full resolution).
 
     Args:
         input_image (np.ndarray or list): Image to be saved
         output_path (str): output file path where image is to be saved
+
+    Todo:
+        Make function more uniform. pdf needs file path, others need open file.
     """
 
     file_path, file_name = os.path.split(output_path)
-    os.makedirs(file_path,  exist_ok=True)
+    os.makedirs(file_path, exist_ok=True)
     file_name, file_extension = file_name.split(".")[0], file_name.split(
         ".")[-1]
 
     if type(input_image) is list:
-        for count, each_image in enumerate(input_image):
-            output_image_path = os.path.join(
-                file_path, file_name + "-" + str(count) + "." + file_extension)
-            each_image = Image.fromarray(each_image)
-            each_image.save(output_image_path)
+        if output_path.split(".")[-1] == 'pdf':
+            updated_image_list = []
+            for each_path in input_image:
+                updated_image_list.append(Image.open(each_path).convert("RGB"))
+
+            updated_image_list[0].save(output_path, "PDF",
+                                       resolution=100.0, save_all=True,
+                                       append_images=updated_image_list[1:])
+        else:
+            for count, each_image in enumerate(input_image):
+                output_image_path = os.path.join(
+                    file_path,
+                    file_name + "-" + str(count) + "." + file_extension)
+                each_image = Image.fromarray(each_image)
+                each_image.save(output_image_path)
     else:
         input_image = Image.fromarray(input_image)
         input_image.save(output_path)

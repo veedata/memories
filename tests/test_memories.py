@@ -124,11 +124,11 @@ class test_save_image(unittest.TestCase):
 
     def test_pdf_single_save(self):
         save_path = os.path.join(self.base_path, 'single_save.pdf')
-        mem.save_pdf([self.img_path], save_path)
+        mem.save_image([self.img_path], save_path)
         self.assertTrue(os.path.isfile(save_path))
 
     def test_pdf_multi_save(self):
-        mem.save_pdf([self.img1_path, self.img2_path, self.img3_path],
+        mem.save_image([self.img1_path, self.img2_path, self.img3_path],
                      os.path.join(self.base_path, 'multi_save.pdf'))
         self.assertTrue(os.path.join(self.base_path, 'multi_save.pdf'))
 
