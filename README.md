@@ -10,7 +10,7 @@ Memories
 Description
 ------
 
-Memories is an easy to use package that helps to seperate clustered images from files and helps add metadata to files. The documentation is in progress and can be found [here](https://memories.readthedocs.io/en/latest).
+Memories is an easy to use package that helps to seperate clustered images from files and helps add metadata to files. 
 
 Installation
 ------
