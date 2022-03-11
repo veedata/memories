@@ -63,6 +63,8 @@ class test_divider(unittest.TestCase):
             for i in range(1, 6):
                 org_image = mem.open_image(
                     os.path.join(self.base_path, 'image' + str(i) + '.jpg'))
+                if i == 2:
+                    org_image, _ = mem.rotate_image(org_image, -90)
                 org_hash = imagehash.average_hash(Image.fromarray(org_image))
 
                 hash_list.append(org_hash - image_hash)
@@ -79,10 +81,11 @@ class test_divider(unittest.TestCase):
 
             hash_list = hash_check(image_hash)
 
+            print(min(hash_list))
             if min(hash_list) < 5:
                 result_list.append(1)
 
-        self.assertEqual(sum(result_list), 4)
+        self.assertEqual(sum(result_list), 5)
 
 
 class test_save_image(unittest.TestCase):
